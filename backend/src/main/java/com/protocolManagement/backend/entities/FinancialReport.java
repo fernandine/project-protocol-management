@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -8,45 +9,27 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_financial_report")
-public class FinancialReport implements Serializable {
+@JsonTypeName("financialReport")
+public class FinancialReport extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
+    @Column(name = "number_document")
     private Long numberDocument;
-    private Long value;
+    @Column(name = "invoice_value")
+    private Double invoiceValue;
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant discharge;
+    @Column(name = "number_pay")
     private Long numberPay;
     private Long bordero;
 
     public FinancialReport(){}
 
-    public FinancialReport(Long id, String entity, Long numberDocument, Long value, Instant discharge, Long numberPay, Long bordero) {
-        this.id = id;
-        this.entity = entity;
+    public FinancialReport( Long numberDocument, Double invoiceValue, Instant discharge, Long numberPay, Long bordero) {
         this.numberDocument = numberDocument;
-        this.value = value;
+        this.invoiceValue = invoiceValue;
         this.discharge = discharge;
         this.numberPay = numberPay;
         this.bordero = bordero;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
     }
 
     public Long getNumberDocument() {
@@ -57,12 +40,12 @@ public class FinancialReport implements Serializable {
         this.numberDocument = numberDocument;
     }
 
-    public Long getValue() {
-        return value;
+    public Double getInvoiceValue() {
+        return invoiceValue;
     }
 
-    public void setValue(Long value) {
-        this.value = value;
+    public void setInvoiceValue(Double invoiceValue) {
+        this.invoiceValue = invoiceValue;
     }
 
     public Instant getDischarge() {
@@ -89,15 +72,4 @@ public class FinancialReport implements Serializable {
         this.bordero = bordero;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FinancialReport that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

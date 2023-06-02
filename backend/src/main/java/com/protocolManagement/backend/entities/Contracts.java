@@ -1,48 +1,29 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_contracts")
-public class Contracts implements Serializable {
+@JsonTypeName("contracts")
+public class Contracts extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
+    @Column(name = "contract_number")
     private String contractNumber;
     private String supplier;
+    @Column(name = "operating_unit")
     private String operatingUnit;
     private String cnpj;
 
     public Contracts(){}
 
-    public Contracts(Long id, String entity, String contractNumber, String supplier, String operatingUnit, String cnpj) {
-        this.id = id;
-        this.entity = entity;
+    public Contracts(String contractNumber, String supplier, String operatingUnit, String cnpj) {
+
         this.contractNumber = contractNumber;
         this.supplier = supplier;
         this.operatingUnit = operatingUnit;
         this.cnpj = cnpj;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
     }
 
     public String getContractNumber() {
@@ -77,15 +58,4 @@ public class Contracts implements Serializable {
         this.cnpj = cnpj;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Contracts contracts)) return false;
-        return id.equals(contracts.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -1,7 +1,5 @@
 package com.protocolManagement.backend.components;
 
-
-
 import com.protocolManagement.backend.entities.User;
 import com.protocolManagement.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 		map.put("lastName", user.getLastName());
 		map.put("email", user.getEmail());
 		map.put("username", user.getUsername());
-		map.put("phone", user.getPhone());
+		map.put("mobileNumber", user.getMobileNumber());
 		map.put("roles", user.getRoles());
 
 		DefaultOAuth2AccessToken token = (DefaultOAuth2AccessToken) accessToken;

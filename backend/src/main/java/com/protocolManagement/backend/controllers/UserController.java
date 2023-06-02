@@ -1,10 +1,10 @@
 package com.protocolManagement.backend.controllers;
 
 import com.protocolManagement.backend.DTO.UserDTO;
-import com.protocolManagement.backend.DTO.UserInsertDTO;
-import com.protocolManagement.backend.DTO.UserUpdateDTO;
+import com.protocolManagement.backend.DTO.UserInsertDto;
+import com.protocolManagement.backend.DTO.UserUpdateDto;
 import com.protocolManagement.backend.services.UserService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDTO dto) {
+    public ResponseEntity<UserDTO> insert(@RequestBody @Valid UserInsertDto dto) {
         UserDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto) {
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody @Valid UserUpdateDto dto) {
         UserDTO newDto = service.update(id, dto);
         return ResponseEntity.ok().body(newDto);
     }

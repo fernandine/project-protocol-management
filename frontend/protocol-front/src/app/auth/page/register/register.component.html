@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="card">
+    <h1>{{ title }}</h1>
+    <form [formGroup]="userForm" (ngSubmit)="onRegister()">
+      <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="firstName" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Sobrenome</mat-label>
+        <input matInput formControlName="lastName" type="text">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="email">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Número de celular</mat-label>
+        <input matInput formControlName="mobileNumber" type="text">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Registrar</button>
+
+      <p class="error">{{ error }}</p>
+    </form>
+  </div>
+</div>

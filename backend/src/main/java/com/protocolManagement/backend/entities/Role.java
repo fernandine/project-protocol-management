@@ -1,13 +1,12 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_role")
-
 public class Role implements Serializable {
 
     @Id

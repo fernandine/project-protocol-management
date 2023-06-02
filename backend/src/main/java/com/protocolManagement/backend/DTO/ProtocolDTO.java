@@ -1,52 +1,24 @@
 package com.protocolManagement.backend.DTO;
 
+import com.protocolManagement.backend.entities.Accounting;
+import com.protocolManagement.backend.entities.DocumentType;
+import com.protocolManagement.backend.entities.enums.EntityType;
+import lombok.*;
+
 import java.io.Serializable;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProtocolDTO implements Serializable {
 
     private Long id;
-    private String entity;
+    private EntityType entity;
     private String management;
     private String operatingUnit;
+    private String protocolNumber;
+    private DocumentType document;
+    private UserDTO user;
 
-    public ProtocolDTO(){}
-
-    public ProtocolDTO(Long id, String entity, String management, String operatingUnit) {
-        this.id = id;
-        this.entity = entity;
-        this.management = management;
-        this.operatingUnit = operatingUnit;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
-    }
-
-    public String getManagement() {
-        return management;
-    }
-
-    public void setManagement(String management) {
-        this.management = management;
-    }
-
-    public String getOperatingUnit() {
-        return operatingUnit;
-    }
-
-    public void setOperatingUnit(String operatingUnit) {
-        this.operatingUnit = operatingUnit;
-    }
 }

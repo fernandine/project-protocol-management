@@ -15,61 +15,62 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+
 import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	@Value("${security.oauth2.client.client-id}")
-	private String clientId;
-	
-	@Value("${security.oauth2.client.client-secret}")
-	private String clientSecret;
-	
-	@Value("${jwt.duration}")
-	private Integer jwtDuration;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private JwtAccessTokenConverter accessTokenConverter;
-	
-	@Autowired
-	private JwtTokenStore tokenStore;
-	
-	@Autowired
-	private AuthenticationManager authenticationManager;
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
 
-	@Autowired
-	private JwtTokenEnhancer tokenEnhancer;
-	
-	@Override
-	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
-	}
+    @Value("${security.oauth2.client.client-secret}")
+    private String clientSecret;
 
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-		.withClient("ecommerce")
-		.secret(passwordEncoder.encode("ecommerce123"))
-		.scopes("read", "write")
-		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(jwtDuration);
-	}
+    @Value("${jwt.duration}")
+    private Integer jwtDuration;
 
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
-		TokenEnhancerChain chain = new TokenEnhancerChain();
-		chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
-		
-		endpoints.authenticationManager(authenticationManager)
-		.tokenStore(tokenStore)
-		.accessTokenConverter(accessTokenConverter)
-		.tokenEnhancer(chain);
-	}
+    @Autowired
+    private JwtAccessTokenConverter accessTokenConverter;
+
+    @Autowired
+    private JwtTokenStore tokenStore;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenEnhancer tokenEnhancer;
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    }
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("ecommerce")
+                .secret(passwordEncoder.encode("ecommerce123"))
+                .scopes("read", "write")
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(jwtDuration);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+        TokenEnhancerChain chain = new TokenEnhancerChain();
+        chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
+
+        endpoints.authenticationManager(authenticationManager)
+                .tokenStore(tokenStore)
+                .accessTokenConverter(accessTokenConverter)
+                .tokenEnhancer(chain);
+    }
 
 }

@@ -1,50 +1,30 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
-import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_collective_labor_agreement")
-public class CollectiveLaborAgreement implements Serializable {
+@JsonTypeName("collectiveLaborAgreement")
+public class CollectiveLaborAgreement extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
+    @Column(name = "box_number")
     private Long boxNumber;
+    @Column(name = "number_process")
     private Long numberProcess;
     private String company;
-    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant year;
+    @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant dateYear;
 
     public CollectiveLaborAgreement(){}
 
-    public CollectiveLaborAgreement(Long id, String entity, Long boxNumber, Long numberProcess, String company, Instant year) {
-        this.id = id;
-        this.entity = entity;
+    public CollectiveLaborAgreement( Long boxNumber, Long numberProcess, String company, Instant dateYear) {
         this.boxNumber = boxNumber;
         this.numberProcess = numberProcess;
         this.company = company;
-        this.year = year;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
+        this.dateYear = dateYear;
     }
 
     public Long getBoxNumber() {
@@ -71,23 +51,11 @@ public class CollectiveLaborAgreement implements Serializable {
         this.company = company;
     }
 
-    public Instant getYear() {
-        return year;
+    public Instant getDateYear() {
+        return dateYear;
     }
 
-    public void setYear(Instant year) {
-        this.year = year;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CollectiveLaborAgreement that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setDateYear(Instant dateYear) {
+        this.dateYear = dateYear;
     }
 }

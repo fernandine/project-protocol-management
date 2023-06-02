@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="card mat-elevation-z4">
+    <h1>{{ title }}</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="username" type="email">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+      <div class="button-container">
+      <button mat-raised-button color="primary" type="submit">Entrar</button>
+    </div>
+      <p class="error">{{ error }}</p>
+    </form>
+  </div>
+</div>

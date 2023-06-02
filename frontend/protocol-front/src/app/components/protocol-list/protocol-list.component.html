@@ -1,0 +1,76 @@
+<mat-table [dataSource]="protocols">
+  <!-- Name Column -->
+  <ng-container matColumnDef="protocolNumber">
+    <mat-header-cell *matHeaderCellDef>Protocolo</mat-header-cell>
+    <mat-cell *matCellDef="let protocol">{{ protocol.protocolNumber }}</mat-cell>
+  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="entity">
+      <mat-header-cell *matHeaderCellDef>Entidade</mat-header-cell>
+      <mat-cell *matCellDef="let protocol">{{ protocol.entity }}</mat-cell>
+    </ng-container>
+      <!-- Name Column -->
+  <ng-container matColumnDef="management">
+    <mat-header-cell *matHeaderCellDef>Gerência</mat-header-cell>
+    <mat-cell *matCellDef="let protocol">{{ protocol.management }}</mat-cell>
+  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="operatingUnit">
+      <mat-header-cell *matHeaderCellDef>Unidade Operacional</mat-header-cell>
+      <mat-cell *matCellDef="let protocol">{{ protocol.operatingUnit }}</mat-cell>
+    </ng-container>
+      <!-- Name Column -->
+  <ng-container matColumnDef="user">
+    <mat-header-cell *matHeaderCellDef>Usuário</mat-header-cell>
+    <mat-cell *matCellDef="let protocol">{{ protocol.user }}</mat-cell>
+  </ng-container>
+
+  <!-- Category Column
+  <ng-container matColumnDef="entity">
+    <mat-header-cell *matHeaderCellDef>entity</mat-header-cell>
+    <mat-cell *matCellDef="let protocol">
+      {{ protocol.category }}
+      <mat-icon aria-hidden="false" aria-label="Categoria do Curso">{{
+        protocol.category | category
+      }}</mat-icon>
+    </mat-cell>
+  </ng-container>-->
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button
+        mat-mini-fab
+        color="accent"
+        aria-label="Adicionar um curso"
+        (click)="onAdd()"
+        class="action-column-header"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <mat-cell *matCellDef="let protocol" class="action-column">
+      <button
+        mat-icon-button
+        color="primary"
+        aria-label="Editar Curso"
+        (click)="onEdit(protocol)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Remover Curso"
+        (click)="onDelete(protocol)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

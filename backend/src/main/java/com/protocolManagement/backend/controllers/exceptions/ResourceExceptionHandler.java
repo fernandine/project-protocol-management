@@ -3,7 +3,7 @@ package com.protocolManagement.backend.controllers.exceptions;
 import com.protocolManagement.backend.services.exceptions.DatabaseException;
 import com.protocolManagement.backend.services.exceptions.EmailException;
 import com.protocolManagement.backend.services.exceptions.ResourceNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

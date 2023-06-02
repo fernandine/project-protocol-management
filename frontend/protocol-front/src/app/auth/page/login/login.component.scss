@@ -1,0 +1,51 @@
+.container {
+  background-image: url('../../../../assets/fundo.jpg');
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2%;
+    padding: 2rem;
+    width: 400px;
+    background-color: white;
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .mat-form-field {
+        width: 100%;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .button-container {
+        margin-top: 2rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .error {
+        color: red;
+        margin-top: 1rem;
+      }
+    }
+  }
+}

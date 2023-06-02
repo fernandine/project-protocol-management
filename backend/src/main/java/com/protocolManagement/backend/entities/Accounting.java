@@ -1,103 +1,31 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.io.Serializable;
+import javax.persistence.*;
+
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_accounting")
-public class Accounting implements Serializable {
+public class Accounting extends DocumentType{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
+    @Column(name = "number_document")
     private Long numberDocument;
-    private Long value;
+    @Column(name = "invoice_value")
+    private Double invoiceValue;
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant discharge;
+    @Column(name = "number_pay")
     private Long numberPay;
     private Long bordero;
 
-    public Accounting(){}
-
-    public Accounting(Long id, String entity, Long numberDocument, Long value, Instant discharge, Long numberPay, Long bordero) {
-        this.id = id;
-        this.entity = entity;
-        this.numberDocument = numberDocument;
-        this.value = value;
-        this.discharge = discharge;
-        this.numberPay = numberPay;
-        this.bordero = bordero;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
-    }
-
-    public Long getNumberDocument() {
-        return numberDocument;
-    }
-
-    public void setNumberDocument(Long numberDocument) {
-        this.numberDocument = numberDocument;
-    }
-
-    public Long getValue() {
-        return value;
-    }
-
-    public void setValue(Long value) {
-        this.value = value;
-    }
-
-    public Instant getDischarge() {
-        return discharge;
-    }
-
-    public void setDischarge(Instant discharge) {
-        this.discharge = discharge;
-    }
-
-    public Long getNumberPay() {
-        return numberPay;
-    }
-
-    public void setNumberPay(Long numberPay) {
-        this.numberPay = numberPay;
-    }
-
-    public Long getBordero() {
-        return bordero;
-    }
-
-    public void setBordero(Long bordero) {
-        this.bordero = bordero;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Accounting that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

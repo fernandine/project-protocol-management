@@ -1,47 +1,25 @@
 package com.protocolManagement.backend.entities;
 
-import com.data.protocolManagement.entities.enums.SupplieType;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.SupplieType;
+import javax.persistence.*;
 
-import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_supplies")
-public class Supplies implements Serializable {
+@JsonTypeName("supplies")
+public class Supplies extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
     private SupplieType type;
-    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant year;
+    @Column (name="date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant dateYear;
 
     public Supplies(){}
 
-    public Supplies(Long id, String entity, SupplieType type, Instant year) {
-        this.id = id;
-        this.entity = entity;
+    public Supplies( SupplieType type, Instant dateYear) {
         this.type = type;
-        this.year = year;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
+        this.dateYear = dateYear;
     }
 
     public SupplieType getType() {
@@ -52,23 +30,11 @@ public class Supplies implements Serializable {
         this.type = type;
     }
 
-    public Instant getYear() {
-        return year;
+    public Instant getDateYear() {
+        return dateYear;
     }
 
-    public void setYear(Instant year) {
-        this.year = year;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Supplies supplies)) return false;
-        return id.equals(supplies.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setDateYear(Instant dateYear) {
+        this.dateYear = dateYear;
     }
 }

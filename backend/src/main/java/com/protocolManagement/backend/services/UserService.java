@@ -2,15 +2,14 @@ package com.protocolManagement.backend.services;
 
 import com.protocolManagement.backend.DTO.RoleDTO;
 import com.protocolManagement.backend.DTO.UserDTO;
-import com.protocolManagement.backend.DTO.UserInsertDTO;
-import com.protocolManagement.backend.DTO.UserUpdateDTO;
+import com.protocolManagement.backend.DTO.UserInsertDto;
+import com.protocolManagement.backend.DTO.UserUpdateDto;
 import com.protocolManagement.backend.entities.Role;
 import com.protocolManagement.backend.entities.User;
 import com.protocolManagement.backend.repositories.RoleRepository;
 import com.protocolManagement.backend.repositories.UserRepository;
 import com.protocolManagement.backend.services.exceptions.DatabaseException;
 import com.protocolManagement.backend.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -71,7 +71,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO insert(UserInsertDTO dto) {
+    public UserDTO insert(UserInsertDto dto) {
         User entity = new User();
         copyDtoToEntity(dto, entity);
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -80,7 +80,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserUpdateDTO dto) {
+    public UserDTO update(Long id, UserUpdateDto dto) {
         try {
             User entity = repository.getReferenceById(id);
 
@@ -110,7 +110,7 @@ public class UserService implements UserDetailsService {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
-        entity.setPhone(dto.getPhone());
+        entity.setMobileNumber(dto.getMobileNumber());
 
         entity.getRoles().clear();
         for (RoleDTO roleDto : dto.getRoles()) {

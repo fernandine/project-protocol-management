@@ -1,46 +1,28 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_international_certification")
-public class InternationalCertification implements Serializable {
+@JsonTypeName("internationalCertification")
+public class InternationalCertification extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String entity;
+    @Column(name = "box_number")
     private Long boxNumber;
+    @Column(name = "process_number")
     private String processNumber;
     private String company;
 
     public InternationalCertification(){}
 
     public InternationalCertification(Long id, String entity, Long boxNumber, String processNumber, String company) {
-        this.id = id;
-        this.entity = entity;
         this.boxNumber = boxNumber;
         this.processNumber = processNumber;
         this.company = company;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
     }
 
     public Long getBoxNumber() {
@@ -67,15 +49,4 @@ public class InternationalCertification implements Serializable {
         this.company = company;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof InternationalCertification that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

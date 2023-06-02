@@ -1,40 +1,33 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_selection_process")
-public class SelectionProcess implements Serializable {
+@JsonTypeName("selectionProcess")
+public class SelectionProcess extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String employee;
     private Long registry;
+    @Column(name = "vacancy_number")
     private Long vacancyNumber;
+    @Column(name = "vacancy_name")
     private String vacancyName;
+    @Column(name = "box_number")
     private Long boxNumber;
 
     public SelectionProcess(){}
 
-    public SelectionProcess(Long id, String employee, Long registry, Long vacancyNumber, String vacancyName, Long boxNumber) {
-        this.id = id;
+    public SelectionProcess( String employee, Long registry, Long vacancyNumber, String vacancyName, Long boxNumber) {
         this.employee = employee;
         this.registry = registry;
         this.vacancyNumber = vacancyNumber;
         this.vacancyName = vacancyName;
         this.boxNumber = boxNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getEmployee() {
@@ -77,15 +70,4 @@ public class SelectionProcess implements Serializable {
         this.boxNumber = boxNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SelectionProcess that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

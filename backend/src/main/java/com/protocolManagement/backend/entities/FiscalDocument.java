@@ -1,50 +1,31 @@
 package com.protocolManagement.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.io.Serializable;
+import javax.persistence.*;
+
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_fiscal_document")
-public class FiscalDocument implements Serializable {
+@JsonTypeName("fiscalDocument")
+public class FiscalDocument extends DocumentType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String entity;
+    @Column(name = "box_number")
     private Long boxNumber;
+    @Column(name = "guide_type")
     private String guideType;
-    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant period;
 
     public FiscalDocument(){}
 
-    public FiscalDocument(Long id, String entity, Long boxNumber, String guideType, Instant period) {
-        this.id = id;
-        this.entity = entity;
+    public FiscalDocument(Long boxNumber, String guideType, Instant period) {
         this.boxNumber = boxNumber;
         this.guideType = guideType;
         this.period = period;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntity() {
-        return entity;
-    }
-
-    public void setEntity(String entity) {
-        this.entity = entity;
-    }
 
     public Long getBoxNumber() {
         return boxNumber;
@@ -70,15 +51,4 @@ public class FiscalDocument implements Serializable {
         this.period = period;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FiscalDocument that)) return false;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

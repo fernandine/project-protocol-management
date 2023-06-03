@@ -3,7 +3,7 @@ import { User } from "./user";
 
 export interface Protocol {
   _id: string;
-  entity: string;
+  core: string;
   management: string;
   operatingUnit: string;
   protocolNumber: string;

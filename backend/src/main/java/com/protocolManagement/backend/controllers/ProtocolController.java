@@ -39,7 +39,7 @@ public class ProtocolController {
     @PostMapping("/generate")
     public String createProtocol(@RequestBody DocumentType documentType) {
         Protocol protocol = new Protocol();
-        protocol.setEntity(documentType.getEntity());
+        protocol.setCore(documentType.getEntity());
         protocol.setId(documentType.getId());
 
         protocol.setProtocolNumber(

@@ -22,19 +22,8 @@
       <!-- Name Column -->
   <ng-container matColumnDef="user">
     <mat-header-cell *matHeaderCellDef>Usuário</mat-header-cell>
-    <mat-cell *matCellDef="let protocol">{{ protocol.user }}</mat-cell>
+    <mat-cell *matCellDef="let protocol">{{ protocol.user.firstName }}</mat-cell>
   </ng-container>
-
-  <!-- Category Column
-  <ng-container matColumnDef="entity">
-    <mat-header-cell *matHeaderCellDef>entity</mat-header-cell>
-    <mat-cell *matCellDef="let protocol">
-      {{ protocol.category }}
-      <mat-icon aria-hidden="false" aria-label="Categoria do Curso">{{
-        protocol.category | category
-      }}</mat-icon>
-    </mat-cell>
-  </ng-container>-->
 
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
@@ -42,7 +31,7 @@
       <button
         mat-mini-fab
         color="accent"
-        aria-label="Adicionar um curso"
+        aria-label="Criar protocolo"
         (click)="onAdd()"
         class="action-column-header"
       >
@@ -54,7 +43,7 @@
       <button
         mat-icon-button
         color="primary"
-        aria-label="Editar Curso"
+        aria-label="Editar"
         (click)="onEdit(protocol)"
       >
         <mat-icon>edit</mat-icon>
@@ -63,7 +52,7 @@
       <button
         mat-icon-button
         color="warn"
-        aria-label="Remover Curso"
+        aria-label="Deletar"
         (click)="onDelete(protocol)"
       >
         <mat-icon>delete</mat-icon>

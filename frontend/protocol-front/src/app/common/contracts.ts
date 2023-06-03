@@ -1,4 +1,4 @@
-export interface Contract extends DocumentType {
+export interface Contracts extends DocumentType {
   contractNumber: string;
   supplier: string;
   operatingUnit: string;

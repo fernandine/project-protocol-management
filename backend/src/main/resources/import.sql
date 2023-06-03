@@ -3,7 +3,7 @@
 -- -------------------------------------------
 INSERT INTO tb_user (first_name, last_name, mobile_number, email, password) VALUES ('Alex', 'Brown', '31971734658', 'alex@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 INSERT INTO tb_user (first_name, last_name, mobile_number, email, password) VALUES ('Maria', 'Green', '31978455484', 'maria@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
-INSERT INTO tb_user (first_name, last_name, mobile_number , email, password) VALUES ('Natiele', 'Dutra', '31978455484', 'natiele@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (first_name, last_name, mobile_number, email, password) VALUES ('Natiele', 'Dutra', '31978455484', 'natiele@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
 
 INSERT INTO tb_role (authority) VALUES ('ROLE_USER');
 INSERT INTO tb_role (authority) VALUES ('ROLE_OPERATOR');
@@ -16,9 +16,9 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
 -- -------------------------------------------
 -- Protocolo
 -- -------------------------------------------
-INSERT INTO tb_protocol (protocol_number, entity, management, operating_unit, user_id) VALUES (123456, 'SESI', 'gerencia', 'unidade_operacional', 1);
-INSERT INTO tb_protocol (protocol_number, entity, management, operating_unit, user_id) VALUES (123456, 'SENAI', 'gerencia', 'unidade_operacional', 2);
-INSERT INTO tb_protocol (protocol_number, entity, management, operating_unit, user_id) VALUES (123456, 'FIEMG', 'gerencia', 'unidade_operacional', 1);
+INSERT INTO tb_protocol (protocol_number, core, management, operating_unit, user_id) VALUES (123456, 'SESI', 'gerencia', 'unidade_operacional', 1);
+INSERT INTO tb_protocol (protocol_number, core, management, operating_unit, user_id) VALUES (123456, 'SENAI', 'gerencia', 'unidade_operacional', 2);
+INSERT INTO tb_protocol (protocol_number, core, management, operating_unit, user_id) VALUES (123456, 'FIEMG', 'gerencia', 'unidade_operacional', 1);
 
 -- -------------------------------------------
 -- Tipos de documentos

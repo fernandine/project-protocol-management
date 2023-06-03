@@ -1,5 +1,6 @@
 package com.protocolManagement.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +21,12 @@ public class Protocol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("_id")
     private Long id;
     private String protocolNumber;
 
     @Enumerated(EnumType.STRING)
-    private EntityType entity;
+    private EntityType core;
     private String management;
     private String operatingUnit;
 

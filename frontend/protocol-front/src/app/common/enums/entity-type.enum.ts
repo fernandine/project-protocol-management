@@ -1,8 +1,8 @@
 export enum EntityType {
-  SESI = 'Sesi',
-  SENAI = 'Senai',
-  FIEMG = 'Fiemg',
+  SESI = 'SESI',
+  SENAI = 'SENAI',
+  FIEMG = 'FIEMG',
   IEL = 'IEL',
   IER = 'IER',
-  CIEMG = 'Ciemg'
+  CIEMG = 'CIEMG'
 }

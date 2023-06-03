@@ -1,6 +1,6 @@
 import { SupplieType } from "./enums/supplie-type.enum";
 
 export interface Supplies extends DocumentType {
-  type: SupplieType;
+  typeSupplie: SupplieType;
   dateYear: Date;
 }

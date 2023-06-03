@@ -39,13 +39,25 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             "/h2-console/**",
             "/register/**",
             "/users/**",
-            "/protocols/**"
+            "/protocols/**",
+            "/new/**",
+            "/edit/**"
 
     };
 
-    //private static final String[] OPERATOR = { };
+    private static final String[] OPERATOR = {
+            "/oauth/token",
+            "/h2-console/**",
+            "/register/**",
+            "/users/**",
+            "/protocols/**",
+            "/new/**",
+            "/edit/**"
+    };
 
-    private static final String[] ADMIN = { "/admin/**" };
+    private static final String[] ADMIN = {
+            "/admin/**"
+    };
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -62,6 +74,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(USER).permitAll()
+                .antMatchers(OPERATOR).permitAll()
                 //.antMatchers(HttpMethod.POST, USER).permitAll()
                 //.antMatchers(USER).hasAnyRole("USER", "ADMIN")
                 .antMatchers(ADMIN).hasRole("ADMIN")

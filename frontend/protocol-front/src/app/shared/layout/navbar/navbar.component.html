@@ -1,5 +1,36 @@
 <p>
   <mat-toolbar color="primary">
     <span>GERENCIADOR DE PROTOCOLOS</span>
+    <div class="list">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div *ngIf="!(isLoggedIn)">
+          <a mat-button routerLink="/auth-login" class="text-900 font-bold inline-flex align-items-center cursor-pointer px-3 hover:text-orange-500" matRipple>
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </a>
+          <a mat-button routerLink="/register" class="text-900 font-bold inline-flex align-items-center cursor-pointer px-3 hover:text-orange-500" matRipple>
+            <mat-icon>person_add</mat-icon>
+            <span>Create Account</span>
+          </a>
+        </div>
+
+        <div *ngIf="(isLoggedIn)">
+          <a mat-button routerLink="/account" class="cursor-pointer flex flex-column align-items-center px-3" matRipple>
+            <mat-icon>person</mat-icon>
+            <span>Olá, {{ getUsername() }}</span>
+          </a>
+          <a mat-button routerLink="/orders" class="mt-1 no-underline text-900 font-medium align-items-center px-3" matRipple>
+            <mat-icon>shopping_cart</mat-icon>
+            <span>My Orders</span>
+          </a>
+          <a mat-button (click)="logout()" class="text-900 font-bold inline-flex align-items-center cursor-pointer px-3 hover:text-orange-500" matRipple>Logout</a>
+        </div>
+      </li>
+      <li class="nav-item px-5">
+
+      </li>
+    </ul>
+  </div>
   </mat-toolbar>
 </p>

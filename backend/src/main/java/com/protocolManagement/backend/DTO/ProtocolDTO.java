@@ -1,6 +1,6 @@
 package com.protocolManagement.backend.DTO;
 
-import com.protocolManagement.backend.entities.Accounting;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.protocolManagement.backend.entities.DocumentType;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import lombok.*;
@@ -13,8 +13,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ProtocolDTO implements Serializable {
 
+    @JsonProperty("_id")
     private Long id;
-    private EntityType entity;
+    private EntityType core;
     private String management;
     private String operatingUnit;
     private String protocolNumber;

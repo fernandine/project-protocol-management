@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import {  map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
 
@@ -10,7 +9,7 @@ import { StorageService } from './storage.service';
 })
 export class AuthService {
 
-  private readonly API = '/oauth/token';
+  private authUrl = environment.authURL + '/oauth/token';
 
   constructor(
     private http: HttpClient,
@@ -20,7 +19,7 @@ export class AuthService {
   login(username: string, password: string): Observable<boolean> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa('ecommerce:ecommerce123')
+      'Authorization': 'Basic ' + btoa('protocol:protocol123')
     });
 
     const body = new URLSearchParams();
@@ -28,19 +27,16 @@ export class AuthService {
     body.set('password', password);
     body.set('grant_type', 'password');
 
-    return this.http.post<any>(this.apiUrl, body.toString(), { headers: headers }).pipe(
+    return this.http.post<any>(this.authUrl, body.toString(), { headers: headers }).pipe(
       map(response => {
         const token = response.access_token;
         const id = response.id;
-        const cpf = response.cpf;
         const firstName = response.firstName;
-        const birthDay = response.birthDay;
         const email = response.email;
         const lastName = response.lastName;
-        const phone = response.phone;
-        const gender = response.gender
+        const mobileNumber = response.mobileNumber;
         if (token) {
-          const currentUser = { username, token, id, email, lastName, firstName, phone, cpf, birthDay, gender };
+          const currentUser = { username, token, id, email, lastName, firstName, mobileNumber};
           this.storageService.setItem('currentUser', currentUser);
           return true;
         } else {
@@ -56,14 +52,14 @@ export class AuthService {
     id: string
     lastName: string;
     firstName: string;
-    phone: string;
+    mobileNumber: string;
     email: string;
-    gender: string;
+
   } | null {
     const currentUser = this.storageService.getItem('currentUser');
-    console.log('currentUser:', currentUser);
+    //console.log('currentUser:', currentUser);
     if (currentUser && currentUser.token) {
-      console.log('token:', currentUser.token);
+      //console.log('token:', currentUser.token);
       return {
         email: currentUser.email || '',
         username: currentUser.username || '',
@@ -71,8 +67,8 @@ export class AuthService {
         id: currentUser.id || '',
         lastName: currentUser.lastName || '',
         firstName: currentUser.firstName || '',
-        phone: currentUser.phone || '',
-        gender: currentUser.gender || ''
+        mobileNumber: currentUser.phone || ''
+
       };
     } else {
       return null;

@@ -4,7 +4,7 @@
   <div class="example-container mat-elevation-z8">
     <app-protocol-list
       *ngIf="protocol$ | async as protocols; else loading"
-      [protocol]="protocols"
+      [protocols]="protocols"
       (add)="onAdd()"
       (edit)="onEdit($event)"
       (remove)="onRemove($event)"

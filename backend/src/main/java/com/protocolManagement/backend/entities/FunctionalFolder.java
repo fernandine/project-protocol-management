@@ -17,7 +17,7 @@ public class FunctionalFolder extends DocumentType {
     @Column(name = "box_number")
     private Long boxNumber;
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant shutdown;
+    private Instant shutdown; //ano do desligamento
 
     public FunctionalFolder(){}
 

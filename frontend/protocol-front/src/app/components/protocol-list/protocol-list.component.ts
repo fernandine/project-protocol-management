@@ -9,11 +9,12 @@ import { Protocol } from '../../common/protocol';
 export class ProtocolListComponent {
 
   @Input() protocols: Protocol[] = [];
+
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
 
-  readonly displayedColumns = ['protocolNumber', 'entity', 'management', 'operatingUnit', 'user'];
+  readonly displayedColumns = ['protocolNumber', 'entity', 'management', 'operatingUnit', 'user', 'actions'];
 
   constructor() { }
 

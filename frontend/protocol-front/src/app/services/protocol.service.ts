@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Protocol } from '../common/protocol';
 
 @Injectable({
@@ -8,12 +9,12 @@ import { Protocol } from '../common/protocol';
 })
 export class ProtocolService {
 
-  private readonly API = 'protocols';
+  private protUrl = environment.apiURL + '/protocols';
 
   constructor(private httpClient: HttpClient) { }
 
   list() {
-    return this.httpClient.get<Protocol[]>(this.API)
+    return this.httpClient.get<Protocol[]>(this.protUrl)
       .pipe(
         first(),
         //delay(5000),
@@ -22,7 +23,7 @@ export class ProtocolService {
   }
 
   loadById(id: string) {
-    return this.httpClient.get<Protocol>(`${this.API}/${id}`);
+    return this.httpClient.get<Protocol>(`${this.protUrl}/${id}`);
   }
 
   save(record: Partial<Protocol>) {
@@ -36,15 +37,15 @@ export class ProtocolService {
   }
 
   private create(record: Partial<Protocol>) {
-    return this.httpClient.post<Protocol>(this.API, record).pipe(first());
+    return this.httpClient.post<Protocol>(this.protUrl, record).pipe(first());
   }
 
   private update(record: Partial<Protocol>) {
-    return this.httpClient.put<Protocol>(`${this.API}/${record._id}`, record).pipe(first());
+    return this.httpClient.put<Protocol>(`${this.protUrl}/${record._id}`, record).pipe(first());
   }
 
   remove(id: string) {
-    return this.httpClient.delete(`${this.API}/${id}`).pipe(first());
+    return this.httpClient.delete(`${this.protUrl}/${id}`).pipe(first());
   }
 
 }

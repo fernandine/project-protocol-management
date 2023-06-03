@@ -35,7 +35,12 @@ export class ProtocolComponent {
           return of([])
         })
       );
+
+    this.protocol$.subscribe(protocols => {
+      console.log('Lista de protocolos:', protocols);
+    });
   }
+
 
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {

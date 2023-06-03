@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ProtocolFormComponent } from './protocol-form/protocol-form.component';
 import { ProtocolListComponent } from './protocol-list/protocol-list.component';
 import { ProtocolComponent } from './protocol/protocol.component';
-import { MaterialModule } from '../material/material/material.module';
+import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
+import { ProtocolRoutingModule } from './protocol-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +16,10 @@ import { MaterialModule } from '../material/material/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule,
+    ProtocolRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ProtocolModule { }

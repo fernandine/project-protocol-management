@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
 
@@ -20,12 +21,13 @@ public class FiscalDocument extends DocumentType {
 
     public FiscalDocument(){}
 
-    public FiscalDocument(Long boxNumber, String guideType, Instant period) {
+    public FiscalDocument(Long id, EntityType entity, Protocol protocol, Long boxNumber,
+                          String guideType, Instant period) {
+        super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.guideType = guideType;
         this.period = period;
     }
-
 
     public Long getBoxNumber() {
         return boxNumber;

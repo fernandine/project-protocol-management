@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -21,12 +23,12 @@ public class TechnicalReport extends DocumentType {
 
     public TechnicalReport(){}
 
-    public TechnicalReport( Long boxNumber, String projectName, Instant period) {
+    public TechnicalReport(Long id, EntityType entity, Protocol protocol, Long boxNumber, String projectName, Instant period) {
+        super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.projectName = projectName;
         this.period = period;
     }
-
 
     public Long getBoxNumber() {
         return boxNumber;

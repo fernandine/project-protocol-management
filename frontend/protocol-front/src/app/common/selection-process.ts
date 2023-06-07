@@ -1,4 +1,5 @@
 export interface SelectionProcess extends DocumentType {
+
   employee: string;
   registry: number;
   vacancyNumber: number;

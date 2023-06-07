@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.protocolManagement.backend.entities.enums.EntityType;
@@ -9,7 +10,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Table(name = "tb_document_type")
+@Inheritance(strategy= InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Contracts.class, name = "contracts"),
@@ -27,16 +29,25 @@ import java.util.Objects;
 public abstract class DocumentType implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@JsonProperty("_id")
     private Long id;
     @Enumerated(EnumType.STRING)
     private EntityType entity;
 
-    @JsonIgnore
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "protocol_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OrderBy("id ASC")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "protocol_id", nullable = false)
     private Protocol protocol;
 
+    public DocumentType(){}
+
+    public DocumentType(Long id, EntityType entity, Protocol protocol) {
+        this.id = id;
+        this.entity = entity;
+        this.protocol = protocol;
+    }
     public Long getId() {
         return id;
     }

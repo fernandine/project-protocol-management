@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ProtocolController {
     @PostMapping("/generate")
     public String createProtocol(@RequestBody DocumentType documentType) {
         Protocol protocol = new Protocol();
-        protocol.setCore(documentType.getEntity());
+        protocol.setInstitution(documentType.getEntity());
         protocol.setId(documentType.getId());
 
         protocol.setProtocolNumber(

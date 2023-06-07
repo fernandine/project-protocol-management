@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -19,7 +21,9 @@ public class InternationalCertification extends DocumentType {
 
     public InternationalCertification(){}
 
-    public InternationalCertification(Long id, String entity, Long boxNumber, String processNumber, String company) {
+
+    public InternationalCertification(Long id, EntityType entity, Protocol protocol, Long boxNumber, String processNumber, String company) {
+        super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.processNumber = processNumber;
         this.company = company;

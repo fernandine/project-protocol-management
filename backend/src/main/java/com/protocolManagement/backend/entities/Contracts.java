@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 
@@ -18,8 +20,10 @@ public class Contracts extends DocumentType {
 
     public Contracts(){}
 
-    public Contracts(String contractNumber, String supplier, String operatingUnit, String cnpj) {
 
+    public Contracts(Long id, EntityType entity, Protocol protocol, String contractNumber,
+                     String supplier, String operatingUnit, String cnpj) {
+        super(id, entity, protocol);
         this.contractNumber = contractNumber;
         this.supplier = supplier;
         this.operatingUnit = operatingUnit;

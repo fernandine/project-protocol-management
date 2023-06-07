@@ -95,7 +95,7 @@ public class ProtocolService {
 
     public String createProtocol(DocumentType documentType) {
         Protocol protocol = new Protocol();
-        protocol.setCore(documentType.getEntity());
+        protocol.setInstitution(documentType.getEntity());
         protocol.setId(documentType.getId());
         protocol.setProtocolNumber(generateProtocolNumber(protocol));
 
@@ -110,10 +110,10 @@ public class ProtocolService {
 
     private void copyDtoToEntity(ProtocolDTO dto, Protocol entity) {
 
-        entity.setCore(dto.getCore());
+        entity.setInstitution(dto.getInstitution());
         entity.setOperatingUnit(dto.getOperatingUnit());
         entity.setManagement(dto.getManagement());
-        entity.setDocument(dto.getDocument());
+        entity.setDocuments(dto.getDocuments().stream().toList());
 
         entity.setProtocolNumber(generateProtocolNumber(entity));
     }

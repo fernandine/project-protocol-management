@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -20,8 +22,8 @@ public class MedicalRecord extends DocumentType {
 
     public MedicalRecord(){}
 
-    public MedicalRecord( Long boxNumber, String employee, Instant period) {
-
+    public MedicalRecord(Long id, EntityType entity, Protocol protocol, Long boxNumber, String employee, Instant period) {
+        super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.employee = employee;
         this.period = period;

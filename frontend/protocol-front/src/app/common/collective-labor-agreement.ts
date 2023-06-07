@@ -1,4 +1,5 @@
-export interface CollectiveLaborAgreement extends DocumentType{
+export interface CollectiveLaborAgreement extends DocumentType {
+
   boxNumber: number;
   numberProcess: number;
   company: string;

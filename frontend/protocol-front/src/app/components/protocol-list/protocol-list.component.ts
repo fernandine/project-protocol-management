@@ -14,7 +14,7 @@ export class ProtocolListComponent {
   @Output() edit = new EventEmitter(false);
   @Output() remove = new EventEmitter(false);
 
-  readonly displayedColumns = ['protocolNumber', 'entity', 'management', 'operatingUnit', 'user', 'actions'];
+  readonly displayedColumns = ['protocolNumber', 'institution', 'management', 'operatingUnit', 'user', 'actions'];
 
   constructor() { }
 

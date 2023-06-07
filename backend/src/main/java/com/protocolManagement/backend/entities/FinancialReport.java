@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -24,7 +26,10 @@ public class FinancialReport extends DocumentType {
 
     public FinancialReport(){}
 
-    public FinancialReport( Long numberDocument, Double invoiceValue, Instant discharge, Long numberPay, Long bordero) {
+
+    public FinancialReport(Long id, EntityType entity, Protocol protocol, Long numberDocument,
+                           Double invoiceValue, Instant discharge, Long numberPay, Long bordero) {
+        super(id, entity, protocol);
         this.numberDocument = numberDocument;
         this.invoiceValue = invoiceValue;
         this.discharge = discharge;

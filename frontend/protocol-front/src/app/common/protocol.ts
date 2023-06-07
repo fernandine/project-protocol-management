@@ -3,10 +3,11 @@ import { User } from "./user";
 
 export interface Protocol {
   _id: string;
-  core: string;
+  institution: string;
   management: string;
   operatingUnit: string;
   protocolNumber: string;
-  document: DocumentType;
+  documents: DocumentType[];
   user: User;
 }
+

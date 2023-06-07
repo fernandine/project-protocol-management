@@ -1,6 +1,8 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
+
 import javax.persistence.*;
 
 import java.time.Instant;
@@ -20,7 +22,8 @@ public class CollectiveLaborAgreement extends DocumentType {
 
     public CollectiveLaborAgreement(){}
 
-    public CollectiveLaborAgreement( Long boxNumber, Long numberProcess, String company, Instant dateYear) {
+    public CollectiveLaborAgreement(Long id, EntityType entity, Protocol protocol, Long boxNumber, Long numberProcess, String company, Instant dateYear) {
+        super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.numberProcess = numberProcess;
         this.company = company;

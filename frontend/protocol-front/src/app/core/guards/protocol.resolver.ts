@@ -21,17 +21,14 @@ export class ProtocolResolver implements Resolve<Protocol> {
     if (route.params && route.params['id']) {
       return this.service.loadById(route.params['id']);
     }
-    const emptyProtocol: Protocol = {
+
+    return of({
       _id: '',
-      core: '',
+      institution: EntityType.SESI,
       management: '',
       operatingUnit: '',
       protocolNumber: '',
-      document: {
-        id: '',
-        entity: EntityType.SESI,
-        type: '',
-      },
+      documents: [],
       user: {
         id: '',
         email: '',
@@ -41,8 +38,7 @@ export class ProtocolResolver implements Resolve<Protocol> {
         phone: '',
         roles: []
       }
-    };
-    return of(emptyProtocol);
+    });
   }
 }
 

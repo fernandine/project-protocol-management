@@ -4,5 +4,6 @@ export enum EntityType {
   FIEMG = 'FIEMG',
   IEL = 'IEL',
   IER = 'IER',
-  CIEMG = 'CIEMG'
+  CIEMG = 'CIEMG',
+  ACCOUNTING = "ACCOUNTING"
 }

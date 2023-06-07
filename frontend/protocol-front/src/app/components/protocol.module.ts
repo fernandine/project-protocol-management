@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProtocolFormComponent,
     ProtocolListComponent,
     ProtocolComponent
+
   ],
   imports: [
     CommonModule,

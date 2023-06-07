@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.protocolManagement.backend.entities.enums.EntityType;
 import com.protocolManagement.backend.entities.enums.StatusFunctionalFolder;
 import javax.persistence.*;
 
@@ -21,8 +22,9 @@ public class FunctionalFolder extends DocumentType {
 
     public FunctionalFolder(){}
 
-    public FunctionalFolder(StatusFunctionalFolder status, String registryEmployee, Long boxNumber, Instant shutdown) {
-
+    public FunctionalFolder(Long id, EntityType entity, Protocol protocol, StatusFunctionalFolder status,
+                            String registryEmployee, Long boxNumber, Instant shutdown) {
+        super(id, entity, protocol);
         this.status = status;
         this.registryEmployee = registryEmployee;
         this.boxNumber = boxNumber;

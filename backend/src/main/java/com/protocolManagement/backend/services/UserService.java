@@ -52,7 +52,7 @@ public class UserService implements UserDetailsService {
     public List<UserDTO> findAll() {
         List<User> list = repository.findAll();
         return list.stream()
-                .map(order -> modelMapper.map(order, UserDTO.class))
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
 

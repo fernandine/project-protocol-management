@@ -1,9 +1,6 @@
 package com.protocolManagement.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import javax.persistence.*;
 
@@ -26,15 +23,15 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = Supplies.class, name = "supplies"),
         @JsonSubTypes.Type(value = TechnicalReport.class, name = "technicalReport"),
 })
-public abstract class DocumentType implements Serializable {
+public class DocumentType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonProperty("_id")
     private Long id;
     @Enumerated(EnumType.STRING)
     private EntityType entity;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OrderBy("id ASC")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

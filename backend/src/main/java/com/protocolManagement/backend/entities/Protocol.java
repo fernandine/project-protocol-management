@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -21,14 +25,21 @@ public class Protocol implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")
     private Long id;
+
     private String protocolNumber;
 
     @Enumerated(EnumType.STRING)
     private EntityType institution;
+    @NotBlank
+    @NotNull
     private String management;
+    @NotNull
     private String operatingUnit;
 
-    @OneToMany(mappedBy = "protocol", cascade = CascadeType.DETACH)
+    @NotNull
+    @NotEmpty
+    @Valid
+    @OneToMany(mappedBy = "protocol", cascade = CascadeType.MERGE)
     private List<DocumentType> documents;
 
     @ManyToOne

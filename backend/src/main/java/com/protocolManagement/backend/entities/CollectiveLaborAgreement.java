@@ -1,13 +1,22 @@
 package com.protocolManagement.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 import java.time.Instant;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_collective_labor_agreement")
 @JsonTypeName("collectiveLaborAgreement")
 public class CollectiveLaborAgreement extends DocumentType {
@@ -19,46 +28,9 @@ public class CollectiveLaborAgreement extends DocumentType {
     private String company;
     @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dateYear;
-
-    public CollectiveLaborAgreement(){}
-
-    public CollectiveLaborAgreement(Long id, EntityType entity, Protocol protocol, Long boxNumber, Long numberProcess, String company, Instant dateYear) {
-        super(id, entity, protocol);
-        this.boxNumber = boxNumber;
-        this.numberProcess = numberProcess;
-        this.company = company;
-        this.dateYear = dateYear;
-    }
-
-    public Long getBoxNumber() {
-        return boxNumber;
-    }
-
-    public void setBoxNumber(Long boxNumber) {
-        this.boxNumber = boxNumber;
-    }
-
-    public Long getNumberProcess() {
-        return numberProcess;
-    }
-
-    public void setNumberProcess(Long numberProcess) {
-        this.numberProcess = numberProcess;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    public Instant getDateYear() {
-        return dateYear;
-    }
-
-    public void setDateYear(Instant dateYear) {
-        this.dateYear = dateYear;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OrderBy("id ASC")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "protocol_id", nullable = false)
+    private Protocol protocol;
 }

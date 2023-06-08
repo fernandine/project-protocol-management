@@ -2,10 +2,12 @@ package com.protocolManagement.backend.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.protocolManagement.backend.entities.DocumentType;
+import com.protocolManagement.backend.entities.Protocol;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -20,7 +22,7 @@ public class ProtocolDTO implements Serializable {
     private String management;
     private String operatingUnit;
     private String protocolNumber;
-    private Set<DocumentType> documents;
+    private List<DocumentType> documents;
     private UserDTO user;
 
 }

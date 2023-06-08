@@ -17,8 +17,8 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (3, 3);
 -- Protocolo
 -- -------------------------------------------
 INSERT INTO tb_protocol (protocol_number, institution, management, operating_unit, user_id) VALUES (123456, 'SESI', 'gerencia', 'unidade_operacional', 1);
-INSERT INTO tb_protocol (protocol_number, institution, management, operating_unit, user_id) VALUES (123456, 'SENAI', 'gerencia', 'unidade_operacional', 2);
-INSERT INTO tb_protocol (protocol_number, institution, management, operating_unit, user_id) VALUES (123456, 'FIEMG', 'gerencia', 'unidade_operacional', 1);
+INSERT INTO tb_protocol (protocol_number, institution, management, operating_unit, user_id) VALUES (1234567, 'SENAI', 'gerencia', 'unidade_operacional', 2);
+INSERT INTO tb_protocol (protocol_number, institution, management, operating_unit, user_id) VALUES (12345678, 'FIEMG', 'gerencia', 'unidade_operacional', 1);
 
 -- -------------------------------------------
 -- Tipos de documentos
@@ -27,9 +27,9 @@ INSERT INTO tb_protocol (protocol_number, institution, management, operating_uni
 --INSERT INTO tb_accounting (id, number_document, invoice_value, discharge, number_pay, bordero) VALUES (1, 123456, 500.00, '2022-07-25T13:00:00Z', 123456, 4561);
 --
 --INSERT INTO tb_document_type (entity, protocol_id) VALUES ('SESI', 1);
---INSERT INTO tb_collective_labor_agreement (id, box_number, number_process, company, date_year) VALUES (2, 123456, 5465464, 'Companhia limitada', '2022-07-25T13:00:00Z');
+--INSERT INTO tb_collective_labor_agreement (id, entity, protocol_id, box_number, number_process, company, date_year) VALUES (1, 'SESI', 1, 123456, 5465464, 'Companhia limitada', '2022-07-25T13:00:00Z');
 --
---INSERT INTO tb_document_type (entity, protocol_id) VALUES ('IEL', 2);
+--INSERT INTO tb_document_type (entity, protocol_id) VALUES ('IEL', 1);
 --INSERT INTO tb_contracts (id, contract_number, supplier, operating_unit, cnpj) VALUES (3, '12345678', 'Nome do fornecedor', 'unidade operacional', '50.644.169/0001-14');
 --
 --INSERT INTO tb_document_type (entity, protocol_id) VALUES ('IER', 2);

@@ -1,5 +1,6 @@
 package com.protocolManagement.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
 
@@ -18,16 +19,21 @@ public class Contracts extends DocumentType {
     private String operatingUnit;
     private String cnpj;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OrderBy("id ASC")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "protocol_id", nullable = false)
+    private Protocol protocol;
+
     public Contracts(){}
 
-
-    public Contracts(Long id, EntityType entity, Protocol protocol, String contractNumber,
-                     String supplier, String operatingUnit, String cnpj) {
+    public Contracts(Long id, EntityType entity, Protocol protocol, String contractNumber, String supplier, String operatingUnit, String cnpj) {
         super(id, entity, protocol);
         this.contractNumber = contractNumber;
         this.supplier = supplier;
         this.operatingUnit = operatingUnit;
         this.cnpj = cnpj;
+        this.protocol = protocol;
     }
 
     public String getContractNumber() {
@@ -62,4 +68,13 @@ public class Contracts extends DocumentType {
         this.cnpj = cnpj;
     }
 
+    @Override
+    public Protocol getProtocol() {
+        return protocol;
+    }
+
+    @Override
+    public void setProtocol(Protocol protocol) {
+        this.protocol = protocol;
+    }
 }

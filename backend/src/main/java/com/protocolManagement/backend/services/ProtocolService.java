@@ -1,26 +1,35 @@
 package com.protocolManagement.backend.services;
 
 import com.protocolManagement.backend.DTO.ProtocolDTO;
+import com.protocolManagement.backend.DTO.UserDTO;
 import com.protocolManagement.backend.entities.DocumentType;
 import com.protocolManagement.backend.entities.Protocol;
 import com.protocolManagement.backend.entities.User;
+import com.protocolManagement.backend.repositories.DocumentTypeRepository;
 import com.protocolManagement.backend.repositories.ProtocolRepository;
 import com.protocolManagement.backend.services.exceptions.DatabaseException;
 import com.protocolManagement.backend.services.exceptions.ResourceNotFoundException;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@Validated
 @Service
 public class ProtocolService {
 
@@ -31,22 +40,33 @@ public class ProtocolService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private DocumentTypeRepository documentTypeRepository;
+    @Autowired
     private AuthService authService;
 
     @Autowired
     private UserService userService;
 
     @Transactional(readOnly = true)
-    public List<ProtocolDTO> findAll() {
-        List<Protocol> list = repository.findAll();
-        return list.stream()
-                .map(order -> modelMapper.map(order, ProtocolDTO.class))
-                .collect(Collectors.toList());
+    public Page<ProtocolDTO> findAll(Pageable pageable) {
+        Page<Protocol> page = repository.findAll(pageable);
+        return page
+                .map(protocol -> modelMapper.map(protocol, ProtocolDTO.class));
     }
+
     @Transactional(readOnly = true)
     public ProtocolDTO getAuthUser() {
         User user = authService.authenticated();
         return modelMapper.map(user, ProtocolDTO.class);
+    }
+
+    @Transactional(readOnly = true)
+    public ProtocolDTO findByProtocol(String protocolNumber) {
+        Protocol protocol = repository.findByProtocolNumber(protocolNumber);
+        if (protocol == null) {
+            throw new ResourceNotFoundException("Protocol not found");
+        }
+        return modelMapper.map(protocol, ProtocolDTO.class);
     }
 
     @Transactional(readOnly = true)
@@ -59,10 +79,13 @@ public class ProtocolService {
     @Transactional
     public ProtocolDTO insert(ProtocolDTO dto) {
         Protocol entity = new Protocol();
-        copyDtoToEntity(dto, entity);
+
         User user = authService.authenticated();
         user.setId(userService.getAuthUser().getId());
         entity.setUser(user);
+
+        copyDtoToEntity(dto, entity);
+
         entity = repository.save(entity);
         return modelMapper.map(entity, ProtocolDTO.class);
     }
@@ -93,19 +116,19 @@ public class ProtocolService {
         }
     }
 
-    public String createProtocol(DocumentType documentType) {
+    public String createProtocol(DocumentType documentType, User user) {
         Protocol protocol = new Protocol();
         protocol.setInstitution(documentType.getEntity());
         protocol.setId(documentType.getId());
-        protocol.setProtocolNumber(generateProtocolNumber(protocol));
-
-        // Aqui você pode adicionar qualquer lógica adicional, como persistir o protocolo no banco de dados ou realizar outras operações relacionadas ao protocolo
-
+        protocol.setProtocolNumber(generateProtocolNumber(user));
         return "Protocolo criado com sucesso! Código: " + protocol.getProtocolNumber();
     }
 
-    private String generateProtocolNumber(Protocol protocol) {
-        return "DOC" + protocol.getId() + "-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    private String generateProtocolNumber(User user ) {
+        return "DOC" + user.getId() + "-" +
+                        LocalDateTime.now().format(
+                DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                        new Random().nextInt(900) + 100;
     }
 
     private void copyDtoToEntity(ProtocolDTO dto, Protocol entity) {
@@ -113,9 +136,19 @@ public class ProtocolService {
         entity.setInstitution(dto.getInstitution());
         entity.setOperatingUnit(dto.getOperatingUnit());
         entity.setManagement(dto.getManagement());
-        entity.setDocuments(dto.getDocuments().stream().toList());
+        entity.setProtocolNumber(generateProtocolNumber(entity.getUser()));
 
-        entity.setProtocolNumber(generateProtocolNumber(entity));
+        List<DocumentType> documents = new ArrayList<>();
+        for (DocumentType document : dto.getDocuments()) {
+            document.setProtocol(entity);
+            documents.add(document);
+        }
+        entity.setDocuments(documents);
+        repository.save(entity);
+
+        for (DocumentType document : documents) {
+            documentTypeRepository.save(document);
+        }
     }
 }
 

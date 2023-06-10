@@ -1,13 +1,10 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import com.protocolManagement.backend.entities.enums.EntityType;
-
 import javax.persistence.*;
-
-import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 @Entity
 @Table(name = "tb_medical_record")
@@ -52,5 +49,4 @@ public class MedicalRecord extends DocumentType {
     public void setPeriod(Instant period) {
         this.period = period;
     }
-
 }

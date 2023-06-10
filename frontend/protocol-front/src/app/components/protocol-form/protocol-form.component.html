@@ -219,8 +219,8 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº do Processo</mat-label>
-    <input matInput type="text" formControlName="numberProcess">
-    <mat-error *ngIf="form.get('numberProcess')?.invalid">{{ getErrorMessage("numberProcess") }}</mat-error>
+    <input matInput type="text" formControlName="processNumber">
+    <mat-error *ngIf="form.get('processNumber')?.invalid">{{ getErrorMessage("processNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -266,12 +266,13 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="period">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('period')?.invalid">{{ getErrorMessage("period") }}</mat-error>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
 </div>
 </div>
@@ -411,7 +412,7 @@
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Tipo do Processo</mat-label>
     <mat-select formControlName="supplieType">
-      <mat-option *ngFor="let supplieType of suppilieTypeOptions" [value]="supplieType">{{ supplieType }}</mat-option>
+      <mat-option *ngFor="let supplieType of supplieTypeOptions" [value]="supplieType">{{ supplieType }}</mat-option>
     </mat-select>
     <mat-error *ngIf="form.get('supplieType')?.invalid">{{ getErrorMessage("supplieType") }}</mat-error>
   </mat-form-field>
@@ -451,14 +452,15 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="period">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('period')?.invalid">{{ getErrorMessage("period") }}</mat-error>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Início">
+      <input matEndDate placeholder="Fim">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
-</div>
+  </div>
 </div>
 
 <!--OPTION FISCAL DOCUMENT-->
@@ -486,12 +488,13 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="period">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('period')?.invalid">{{ getErrorMessage("period") }}</mat-error>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
 </div>
 </div>

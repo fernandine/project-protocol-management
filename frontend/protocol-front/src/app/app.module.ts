@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProtocolModule } from './components/protocol.module';
 import { MaterialModule } from './material/material.module';
 import { AuthModule } from './auth/auth.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     ProtocolModule,
     AuthModule,
+    FlexLayoutModule,
     MaterialModule,
     ReactiveFormsModule,
     SharedModule,

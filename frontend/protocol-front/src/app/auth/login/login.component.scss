@@ -1,51 +1,35 @@
-.container {
+.image {
+  width: 100%;
+  height: auto;
+}
 
-  background-size: cover;
-  background-position: center;
+/* Estilos para o card de login */
+.card {
+  max-width: 400px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 2rem;
+}
 
+.card-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Estilos para o formulário de login */
+.form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  width: 100%;
+}
+
+.button-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2%;
-    padding: 2rem;
-    width: 400px;
-    background-color: white;
-
-    h1 {
-      margin-bottom: 2rem;
-    }
-
-    form {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-
-      .mat-form-field {
-        width: 100%;
-
-        input {
-          width: 100%;
-        }
-      }
-
-      .button-container {
-        margin-top: 2rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-
-      .error {
-        color: red;
-        margin-top: 1rem;
-      }
-    }
-  }
+  margin-top: 1rem;
 }
+

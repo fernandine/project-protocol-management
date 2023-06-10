@@ -2,5 +2,6 @@ export interface FiscalDocument extends DocumentType {
 
   boxNumber: number;
   guideType: string;
-  period: Date;
+  startDate: Date;
+  endDate: Date;
 }

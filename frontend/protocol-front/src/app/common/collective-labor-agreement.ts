@@ -1,7 +1,7 @@
 export interface CollectiveLaborAgreement extends DocumentType {
 
   boxNumber: number;
-  numberProcess: number;
+  processNumber: number;
   company: string;
   dateYear: Date;
 }

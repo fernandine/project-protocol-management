@@ -59,14 +59,16 @@ public class UserService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
         Optional<User> obj = repository.findById(id);
-        User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+        User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
         return modelMapper.map(entity, UserDTO.class);
     }
 
     @Transactional(readOnly = true)
     public UserDTO getAuthUser() {
         User user = authService.authenticated();
-
+        if (user == null) {
+            throw new ResourceNotFoundException("Autenticação do usuário falhou.");
+        }
         return modelMapper.map(user, UserDTO.class);
     }
 
@@ -89,7 +91,7 @@ public class UserService implements UserDetailsService {
             return modelMapper.map(entity, UserDTO.class);
         }
         catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id not found " + id);
+            throw new ResourceNotFoundException("Identificador não encontrado " + id);
         }
     }
 
@@ -98,7 +100,7 @@ public class UserService implements UserDetailsService {
             repository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Id not found " + id);
+            throw new ResourceNotFoundException("Identificador não encontrado " + id);
         }
         catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Integrity violation");
@@ -124,10 +126,10 @@ public class UserService implements UserDetailsService {
 
         User user = repository.findByEmail(username);
         if (user == null) {
-            logger.error("User not found: " + username);
-            throw new UsernameNotFoundException("Email not found");
+            logger.error("Usuário não encontrado: " + username);
+            throw new UsernameNotFoundException("Email não encontrado");
         }
-        logger.info("User found: " + username);
+        logger.info("Usuário encontrado: " + username);
         return user;
     }
 }

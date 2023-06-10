@@ -82,4 +82,3 @@ public class DocumentType implements Serializable {
         return Objects.hash(id);
     }
 }
-

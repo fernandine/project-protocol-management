@@ -50,6 +50,10 @@ export class ProtocolComponent {
 
   ngOnInit(): void { }
 
+  onPdf() {
+    this.router.navigate(['generate-pdf'], { relativeTo: this.route });
+  }
+
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
@@ -60,7 +64,7 @@ export class ProtocolComponent {
 
   onRemove(protocol: Protocol) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Tem certeza que deseja remover esse curso?',
+      data: 'Tem certeza que deseja remover esse protocolo?',
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
@@ -68,13 +72,13 @@ export class ProtocolComponent {
         this.protocolService.remove(protocol._id).subscribe(
           () => {
             this.refresh();
-            this.snackBar.open('Curso removido com sucesso!', 'X', {
+            this.snackBar.open('Protocolo removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',
               horizontalPosition: 'center'
             });
           },
-          () => this.onError('Erro ao tentar remover curso.')
+          () => this.onError('Erro ao tentar remover protocolo.')
         );
       }
     });

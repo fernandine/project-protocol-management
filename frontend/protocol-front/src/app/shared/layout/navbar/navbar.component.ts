@@ -33,6 +33,13 @@ export class NavbarComponent {
     return currentUser ? currentUser.firstName : '';
   }
 
+  login() {
+    this.router.navigate(['/auth-login']);
+  }
+  register(){
+    this.router.navigate(['/register']);
+  }
+
   logout(): void {
     this.authService.logout();
     location.reload();

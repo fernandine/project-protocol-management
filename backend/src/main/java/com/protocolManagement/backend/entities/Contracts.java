@@ -6,7 +6,6 @@ import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "tb_contracts")
 @JsonTypeName("contracts")
@@ -27,7 +26,8 @@ public class Contracts extends DocumentType {
 
     public Contracts(){}
 
-    public Contracts(Long id, EntityType entity, Protocol protocol, String contractNumber, String supplier, String operatingUnit, String cnpj) {
+    public Contracts(Long id, EntityType entity, Protocol protocol, String contractNumber, String supplier,
+                     String operatingUnit, String cnpj) {
         super(id, entity, protocol);
         this.contractNumber = contractNumber;
         this.supplier = supplier;

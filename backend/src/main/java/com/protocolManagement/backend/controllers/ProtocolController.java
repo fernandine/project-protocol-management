@@ -27,9 +27,9 @@ public class ProtocolController {
     private ProtocolService service;
 
     @GetMapping
-    public ResponseEntity<Page<ProtocolDTO>> findAll(Pageable pageable) {
-        Page<ProtocolDTO> page = service.findAll(pageable);
-        return ResponseEntity.ok().body(page);
+    public ResponseEntity<List<ProtocolDTO>> findAll() {
+        List<ProtocolDTO> list = service.findAll();
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/searchBy/{protocolNumber}")

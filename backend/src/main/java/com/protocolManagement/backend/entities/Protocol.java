@@ -2,9 +2,6 @@ package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.protocolManagement.backend.entities.enums.EntityType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 

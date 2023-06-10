@@ -48,10 +48,11 @@ public class ProtocolService {
     private UserService userService;
 
     @Transactional(readOnly = true)
-    public Page<ProtocolDTO> findAll(Pageable pageable) {
-        Page<Protocol> page = repository.findAll(pageable);
-        return page
-                .map(protocol -> modelMapper.map(protocol, ProtocolDTO.class));
+    public List<ProtocolDTO> findAll() {
+        List<Protocol> page = repository.findAll();
+        return page.stream()
+                .map(protocol -> modelMapper.map(protocol, ProtocolDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -126,9 +127,9 @@ public class ProtocolService {
 
     private String generateProtocolNumber(User user ) {
         return "DOC" + user.getId() + "-" +
-                        LocalDateTime.now().format(
-                DateTimeFormatter.ofPattern("yyyyMMdd")) +
-                        new Random().nextInt(900) + 100;
+                LocalDateTime.now().format(
+                        DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                new Random().nextInt(900) + 100;
     }
 
     private void copyDtoToEntity(ProtocolDTO dto, Protocol entity) {
@@ -151,4 +152,3 @@ public class ProtocolService {
         }
     }
 }
-

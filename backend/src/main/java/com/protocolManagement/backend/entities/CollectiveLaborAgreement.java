@@ -23,8 +23,7 @@ public class CollectiveLaborAgreement extends DocumentType {
 
     @Column(name = "box_number")
     private Long boxNumber;
-    @Column(name = "number_process")
-    private Long numberProcess;
+
     private String company;
     @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dateYear;

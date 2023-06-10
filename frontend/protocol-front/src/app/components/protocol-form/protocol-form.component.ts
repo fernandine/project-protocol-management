@@ -1,12 +1,9 @@
-import { Contracts } from './../../common/contracts';
 import { Component } from '@angular/core';
 import {
   FormGroup,
   NonNullableFormBuilder,
   Validators,
-  UntypedFormArray,
-  FormControl,
-  FormArray,
+  UntypedFormArray
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +15,6 @@ import { StatusFunctionalFolder } from 'src/app/common/enums/status-functional-f
 import { SupplieType } from 'src/app/common/enums/supplie-type.enum';
 import { DocumentType } from 'src/app/common/document-type';
 import { FormUtilsService } from 'src/app/services/form-utils.service';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-protocol-form',
@@ -26,14 +22,11 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./protocol-form.component.scss'],
 })
 export class ProtocolFormComponent {
+
   form!: FormGroup;
   entityTypes = Object.values(EntityType);
   statusFunctionalFolder = Object.values(StatusFunctionalFolder);
-  suppilieTypeOptions = Object.values(SupplieType).map((value) => ({
-    label: value,
-    value,
-  }));
-  fieldsToDisplay: any[] = [];
+  supplieTypeOptions = Object.values(SupplieType);
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -68,32 +61,32 @@ export class ProtocolFormComponent {
   }
 
   private createDocument(
-    document: DocumentType = { id: '', entity: EntityType.FIEMG, type: '' }
+    document: DocumentType = { id: '', entity: EntityType.CIEMG, type: '' }
   ) {
     return this.formBuilder.group({
       id: [document.id],
-      entity: [EntityType.FIEMG],
+      entity: [document.entity],
       type: [document.type],
-      numberDocument: [''],
-      invoiceValue: [''],
-      discharge: new Date,
-      numberPay: [''],
-      bordero: [''],
-      supplieType: SupplieType.AF,
+      numberDocument: [null],
+      invoiceValue: [null],
+      discharge: [null],
+      numberPay: [null],
+      bordero: [null],
+      supplieType: [null],
       contractNumber: [''],
       supplier: [''],
       operatingUnit: [''],
       cnpj: [''],
-      boxNumber: [''],
-      numberProcess: [''],
+      startDate: [null],
+      endDate: [null],
+      boxNumber: [null],
+      processNumber: [null],
       company: [''],
-      dateYear: new Date,
+      dateYear: [null],
       guideType: [''],
-      period: new Date,
-      status: StatusFunctionalFolder.ACTIVE,
+      status: [''],
       registryEmployee: [''],
       shutdown: [''],
-      processNumber: [''],
       employee: [''],
       registry: [''],
       vacancyNumber: [''],
@@ -106,6 +99,7 @@ export class ProtocolFormComponent {
     const documents = this.form.get('documents') as UntypedFormArray;
     documents.push(this.createDocument());
   }
+
   removeDocumentType(index: number) {
     const documents = this.form.get('documents') as UntypedFormArray;
     documents.removeAt(index);
@@ -159,33 +153,3 @@ export class ProtocolFormComponent {
     return 'Campo Inválido';
   }
 }
-/*
-      documents: this.formBuilder.array([{
-        entity: [''],
-        type: [''],
-        numberDocument: [''],
-        invoiceValue: [''],
-        discharge: [Date],
-        numberPay: [''],
-        bordero: [''],
-        typeSupplie: [''],
-        contractNumber: [''],
-        supplier: [''],
-        operatingUnit: [''],
-        cnpj: [''],
-        boxNumber: [''],
-        numberProcess: [''],
-        company: [''],
-        dateYear: [''],
-        guideType: [''],
-        period: [''],
-        status: [''],
-        registryEmployee: [''],
-        shutdown: [''],
-        processNumber: [''],
-        employee: [''],
-        registry: [''],
-        vacancyNumber: [''],
-        vacancyName: [''],
-        projectName: [''],
-      }]),*/

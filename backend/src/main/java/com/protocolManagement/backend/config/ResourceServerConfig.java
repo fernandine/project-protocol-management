@@ -40,9 +40,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             "/register/**",
             "/users/**",
             "/protocols/**",
-            "/new/**",
-            "/edit/**"
-
     };
 
     private static final String[] OPERATOR = {
@@ -51,8 +48,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             "/register/**",
             "/users/**",
             "/protocols/**",
-            "/new/**",
-            "/edit/**"
+
     };
 
     private static final String[] ADMIN = {

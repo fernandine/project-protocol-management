@@ -67,7 +67,7 @@ export class AuthService {
         id: currentUser.id || '',
         lastName: currentUser.lastName || '',
         firstName: currentUser.firstName || '',
-        mobileNumber: currentUser.phone || ''
+        mobileNumber: currentUser.mobileNumber || ''
 
       };
     } else {

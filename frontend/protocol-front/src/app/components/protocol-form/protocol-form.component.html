@@ -63,7 +63,7 @@
           <mat-option value="medicalRecord">Prontuário Médico</mat-option>
           <mat-option value="fiscalDocument">Documento Fiscal</mat-option>
         </mat-select>
-        <mat-error *ngIf="form.get('type')?.invalid && form.get('type')?.touched">
+        <mat-error *ngIf="getFormArray()[i].get('type')?.invalid && form.get('type')?.touched">
           {{ getErrorMessage("type") }}</mat-error>
       </mat-form-field>
       <div style="display: flex; justify-content: center; align-items: center;">
@@ -81,31 +81,31 @@
           <mat-select formControlName="entity">
             <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
           </mat-select>
-          <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>Nº do Contrato</mat-label>
           <input matInput type="text" formControlName="contractNumber">
-          <mat-error *ngIf="form.get('contractNumber')?.invalid">{{ getErrorMessage("contractNumber") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('contractNumber')?.invalid">{{ getErrorMessage("contractNumber") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>Fornecedor</mat-label>
           <input matInput type="text" formControlName="supplier">
-          <mat-error *ngIf="form.get('supplier')?.invalid">{{ getErrorMessage("supplier") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('supplier')?.invalid">{{ getErrorMessage('supplier') }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>Unidade Operacional</mat-label>
           <input matInput type="text" formControlName="operatingUnit">
-          <mat-error *ngIf="form.get('operatingUnit')?.invalid">{{ getErrorMessage("operatingUnit") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('operatingUnit')?.invalid">{{ getErrorMessage("operatingUnit") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
           <mat-label>CNPJ do Fornecedor</mat-label>
           <input matInput type="text" formControlName="cnpj">
-          <mat-error *ngIf="form.get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('cnpj')?.invalid">{{ getErrorMessage("cnpj") }}</mat-error>
         </mat-form-field>
 
       </div>
@@ -118,19 +118,19 @@
             <mat-select formControlName="entity">
               <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+            <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
           </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº do Documento / NF</mat-label>
           <input matInput type="text" formControlName="numberDocument">
-          <mat-error *ngIf="form.get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Valor Baixado</mat-label>
           <input matInput type="text" formControlName="invoiceValue">
-          <mat-error *ngIf="form.get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
@@ -138,19 +138,19 @@
           <input matInput [matDatepicker]="dischargeDatePicker" formControlName="discharge">
           <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #dischargeDatePicker></mat-datepicker>
-          <mat-error *ngIf="form.get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº PAG</mat-label>
           <input matInput type="text" formControlName="numberPay">
-          <mat-error *ngIf="form.get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Borderô</mat-label>
           <input matInput type="text" formControlName="bordero">
-          <mat-error *ngIf="form.get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
         </mat-form-field>
       </div>
       </div>
@@ -163,19 +163,19 @@
             <mat-select formControlName="entity">
               <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
             </mat-select>
-            <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+            <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
           </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº do Documento / NF</mat-label>
           <input matInput type="text" formControlName="numberDocument">
-          <mat-error *ngIf="form.get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Valor Baixado</mat-label>
           <input matInput type="text" formControlName="invoiceValue">
-          <mat-error *ngIf="form.get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
@@ -183,19 +183,19 @@
           <input matInput [matDatepicker]="dischargeDatePicker" formControlName="discharge">
           <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #dischargeDatePicker></mat-datepicker>
-          <mat-error *ngIf="form.get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº PAG</mat-label>
           <input matInput type="text" formControlName="numberPay">
-          <mat-error *ngIf="form.get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Borderô</mat-label>
           <input matInput type="text" formControlName="bordero">
-          <mat-error *ngIf="form.get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
         </mat-form-field>
       </div>
       </div>
@@ -208,25 +208,25 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº do Processo</mat-label>
     <input matInput type="text" formControlName="processNumber">
-    <mat-error *ngIf="form.get('processNumber')?.invalid">{{ getErrorMessage("processNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('processNumber')?.invalid">{{ getErrorMessage("processNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Empresa</mat-label>
     <input matInput type="text" formControlName="company">
-    <mat-error *ngIf="form.get('company')?.invalid">{{ getErrorMessage("company") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('company')?.invalid">{{ getErrorMessage("company") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -236,7 +236,7 @@
     <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
     <mat-hint>YYYY</mat-hint>
     <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -249,19 +249,19 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Projeto</mat-label>
     <input matInput type="text" formControlName="projectName">
-    <mat-error *ngIf="form.get('projectName')?.invalid">{{ getErrorMessage("projectName") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('projectName')?.invalid">{{ getErrorMessage("projectName") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -285,37 +285,37 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Funcionário</mat-label>
     <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="form.get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>RE - Funcionário</mat-label>
     <input matInput type="text" formControlName="registry">
-    <mat-error *ngIf="form.get('registry')?.invalid">{{ getErrorMessage("registry") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('registry')?.invalid">{{ getErrorMessage("registry") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Vaga</mat-label>
     <input matInput type="text" formControlName="vacancyNumber">
-    <mat-error *ngIf="form.get('vacancyNumber')?.invalid">{{ getErrorMessage("vacancyNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('vacancyNumber')?.invalid">{{ getErrorMessage("vacancyNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nome da Vaga</mat-label>
     <input matInput type="text" formControlName="vacancyName">
-    <mat-error *ngIf="form.get('vacancyName')?.invalid">{{ getErrorMessage("vacancyName") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('vacancyName')?.invalid">{{ getErrorMessage("vacancyName") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -328,7 +328,7 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -336,19 +336,19 @@
     <mat-select formControlName="status">
       <mat-option *ngFor="let statusFunctionalFolder of statusFunctionalFolder" [value]="statusFunctionalFolder">{{ statusFunctionalFolder }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="form.get('status')?.invalid">{{ getErrorMessage("status") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('status')?.invalid">{{ getErrorMessage("status") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>RE - Funcionário</mat-label>
     <input matInput type="text" formControlName="registryEmployee">
-    <mat-error *ngIf="form.get('registryEmployee')?.invalid">{{ getErrorMessage("registryEmployee") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('registryEmployee')?.invalid">{{ getErrorMessage("registryEmployee") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -358,13 +358,13 @@
     <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
     <mat-hint>YYYY</mat-hint>
     <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('shutdown')?.invalid">{{ getErrorMessage("shutdown") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('shutdown')?.invalid">{{ getErrorMessage("shutdown") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Funcionário</mat-label>
     <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="form.get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -377,24 +377,24 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº do Processo</mat-label>
     <input matInput type="text" formControlName="numberProcess">
-    <mat-error *ngIf="form.get('numberProcess')?.invalid">{{ getErrorMessage("numberProcess") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('numberProcess')?.invalid">{{ getErrorMessage("numberProcess") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Empresa</mat-label>
     <input matInput type="text" formControlName="company">
-    <mat-error *ngIf="form.get('company')?.invalid">{{ getErrorMessage("company") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('company')?.invalid">{{ getErrorMessage("company") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -407,14 +407,14 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Tipo do Processo</mat-label>
     <mat-select formControlName="supplieType">
       <mat-option *ngFor="let supplieType of supplieTypeOptions" [value]="supplieType">{{ supplieType }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="form.get('supplieType')?.invalid">{{ getErrorMessage("supplieType") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('supplieType')?.invalid">{{ getErrorMessage("supplieType") }}</mat-error>
   </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Ano</mat-label>
@@ -423,7 +423,7 @@
     <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
     <mat-hint>YYYY</mat-hint>
     <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="form.get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -436,18 +436,18 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nome do Funcionário</mat-label>
     <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="form.get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -471,19 +471,19 @@
       <mat-select formControlName="entity">
         <mat-option *ngFor="let entityType of entityTypes" [value]="entityType">{{ entityType }}</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
+      <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
     <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="form.get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Tipo de Guia</mat-label>
     <input matInput type="text" formControlName="guideType">
-    <mat-error *ngIf="form.get('guideType')?.invalid">{{ getErrorMessage("guideType") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('guideType')?.invalid">{{ getErrorMessage("guideType") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">

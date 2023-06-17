@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.protocolManagement.backend.DTO.UserDTO;
 import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
@@ -36,7 +37,7 @@ public class Protocol implements Serializable {
     @NotNull
     @NotEmpty
     @Valid
-    @OneToMany(mappedBy = "protocol", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "protocol", cascade = CascadeType.ALL)
     private List<DocumentType> documents;
 
     @ManyToOne

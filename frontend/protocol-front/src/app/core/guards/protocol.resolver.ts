@@ -34,8 +34,7 @@ export class ProtocolResolver implements Resolve<Protocol> {
         email: '',
         firstName: '',
         lastName: '',
-        password: '',
-        phone: '',
+        mobileNumber: '',
         roles: []
       }
     });

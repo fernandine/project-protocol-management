@@ -27,9 +27,9 @@ public class CollectiveLaborAgreement extends DocumentType {
     private String company;
     @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dateYear;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OrderBy("id ASC")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinColumn(name = "protocol_id", nullable = false)
-    private Protocol protocol;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @OrderBy("id ASC")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JoinColumn(name = "protocol_id", nullable = false)
+//    private Protocol protocol;
 }

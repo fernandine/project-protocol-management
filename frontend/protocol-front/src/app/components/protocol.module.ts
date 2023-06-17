@@ -7,6 +7,8 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ProtocolRoutingModule } from './protocol-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginatorService } from '../services/custom-paginator.service';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     ProtocolRoutingModule,
     ReactiveFormsModule
+  ], providers: [
+   { provide: MatPaginatorIntl, useClass: CustomPaginatorService }
   ]
 })
 export class ProtocolModule { }

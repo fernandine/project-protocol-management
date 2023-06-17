@@ -32,9 +32,8 @@ public class DocumentType implements Serializable {
     private EntityType entity;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @OrderBy("id ASC")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "protocol_id", nullable = false)
     private Protocol protocol;
 

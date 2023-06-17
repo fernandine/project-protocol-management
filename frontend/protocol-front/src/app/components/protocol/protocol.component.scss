@@ -17,3 +17,13 @@ mat-card {
   align-items: center;
   justify-content: center;
 }
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+.paginator-container {
+  align-self: flex-end;
+}
+.paginator {
+  background-color: var(--primary-color);
+}

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+import { Page } from 'src/app/common/pagination';
 import { Protocol } from 'src/app/common/protocol';
 import { ProtocolService } from 'src/app/services/protocol.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
@@ -15,7 +17,13 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 })
 export class ProtocolComponent {
 
-  protocol$: Observable<Protocol[]> | null = null;
+  page$: Observable<Page<Protocol>> | null = null;
+
+  paginationData = {
+    pageIndex: 0,
+    pageSize: 10,
+    pageElements: 0
+  };
 
   constructor(
     private protocolService: ProtocolService,
@@ -23,32 +31,42 @@ export class ProtocolComponent {
     private router: Router,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.refresh();
   }
 
   refresh() {
-    this.protocol$ = this.protocolService.list()
-      .pipe(
-        catchError(error => {
-          this.onError('Erro ao carregar protocolo.');
-          return of([])
-        })
-      );
-
-    this.protocol$.subscribe(protocols => {
-      console.log('Lista de protocolos:', protocols);
+    const pageSize = 10;
+    const pageIndex = 0;
+    const pageElements = 0;
+    this.protocolService.listWithPagination(pageSize, pageIndex, pageElements)
+    .pipe(
+      catchError(error => {
+        this.onError('Erro ao carregar protocolo.');
+        return of({ content: [], totalPages: 0, totalElements: 0 });
+      }),
+      map(({ content, totalPages, totalElements }) => ({ content, totalPages, totalElements } as Page<Protocol>))
+    )
+    .subscribe(page => {
+      console.log('Página de protocolos:', page);
+      this.page$ = of(page);
+      this.paginationData.pageElements = page.totalElements;
     });
   }
 
-
+onPaginatorChange(event: PageEvent): void {
+  this.paginationData.pageIndex = event.pageIndex;
+  this.paginationData.pageSize = event.pageSize;
+  this.paginationData.pageElements = event.length;
+  this.refresh();
+}
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
     });
   }
-
-  ngOnInit(): void { }
 
   onPdf() {
     this.router.navigate(['generate-pdf'], { relativeTo: this.route });

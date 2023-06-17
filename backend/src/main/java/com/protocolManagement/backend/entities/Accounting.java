@@ -42,11 +42,11 @@ public class Accounting extends DocumentType {
     private Long numberPay;
     private Long bordero;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OrderBy("id ASC")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinColumn(name = "protocol_id", nullable = false)
-    private Protocol protocol;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @OrderBy("id ASC")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JoinColumn(name = "protocol_id", nullable = false)
+//    private Protocol protocol;
 
 }
 

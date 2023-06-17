@@ -1,29 +1,36 @@
-<div fxLayout="row">
-  <div fxFlex="50%">
-    <!-- Aqui vai a imagem -->
-    <img src="./../../../assets/fundo.jpg" alt="Imagem" class="image">
-  </div>
-  <div fxFlex="50%" fxLayoutAlign="center center">
-    <!-- Aqui vai o card de login -->
-    <mat-card class="card">
-      <h1 class="card-title">{{ title }}</h1>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <mat-form-field class="form-field example-full-width">
-          <mat-label>E-mail</mat-label>
-          <input matInput formControlName="username" type="email">
-        </mat-form-field>
+<div class="page-container">
+  <img src="./../../../assets/fundo.jpg" alt="Imagem" class="background-image">
 
-        <mat-form-field class="form-field example-full-width">
+  <mat-card class="card">
+    <h1 class="title">Login</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="username" type="email">
+      </mat-form-field>
+
+      <div class="password" style="display: flex; flex-direction: column;">
+        <mat-form-field appearance="outline" class="form-field">
           <mat-label>Senha</mat-label>
-          <input matInput formControlName="password" type="password">
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Mostrar Senha'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+          <mat-hint style="cursor: pointer;" routerLink="/auth-login" align="end">Esqueceu a senha?</mat-hint>
         </mat-form-field>
+      </div>
 
-        <div class="button-container">
-          <button mat-raised-button color="primary" type="submit">Entrar</button>
-        </div>
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit">Entrar</button>
+        <button mat-button (click)="onRegister()" class="link">Cadastre-se</button>
+      </div>
 
-        <p class="error">{{ error }}</p>
-      </form>
-    </mat-card>
-  </div>
+      <p class="error">{{ error }}</p>
+    </form>
+  </mat-card>
+</div>
+
+<div id="footer">
+  created by <a href="https://www.linkedin.com/in/jean-fernandine">@Jean Fernandine</a>
 </div>

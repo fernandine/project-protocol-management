@@ -15,6 +15,7 @@ import { StatusFunctionalFolder } from 'src/app/common/enums/status-functional-f
 import { SupplieType } from 'src/app/common/enums/supplie-type.enum';
 import { DocumentType } from 'src/app/common/document-type';
 import { FormUtilsService } from 'src/app/services/form-utils.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-protocol-form',
@@ -34,17 +35,22 @@ export class ProtocolFormComponent {
     private snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute,
-    public formUtils: FormUtilsService
+    public formUtils: FormUtilsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     const protocol: Protocol = this.route.snapshot.data['protocol'];
+    console.log('number'+ protocol.protocolNumber);
+
     this.form = this.formBuilder.group({
       _id: [protocol._id],
       institution: [protocol.institution, [Validators.required]],
+      //protocolNumer: [protocol.protocolNumber],
       management: [protocol.management, [Validators.required]],
       operatingUnit: [protocol.operatingUnit, [Validators.required]],
       documents: this.formBuilder.array(this.retrieveDocuments(protocol)),
+      //user: [protocol.user]
     });
   }
 
@@ -110,11 +116,32 @@ export class ProtocolFormComponent {
   }
 
   onSubmit() {
-    this.service.save(this.form.value).subscribe(
-      (result) => this.onSuccess(),
-      (error) => this.onError()
-    );
+    if (this.form.valid) {
+      const record = this.form.value as Partial<Protocol>;
+      const currentUser = this.authService.getCurrentUser();
+      if (currentUser) {
+        // Define o objeto do usuário no registro de protocolo
+        record.user = {
+          id: currentUser.id,
+          email: currentUser.email,
+          firstName: currentUser.firstName,
+          lastName: currentUser.lastName,
+          mobileNumber: currentUser.mobileNumber,
+          roles: []
+        };
+
+
+      }
+      // Salva o registro de protocolo com o número do protocolo gerado
+      this.service.save(this.service.generateProtocolNumber(record)).subscribe({
+        next: () => this.onSuccess(),
+        error: () => this.onError()
+      });
+    } else {
+      this.formUtils.validateAllFormFields(this.form);
+    }
   }
+
 
   onCancel() {
     this.location.back();
@@ -127,6 +154,15 @@ export class ProtocolFormComponent {
 
   private onError() {
     this.snackBar.open('Erro ao salvar curso.', '', { duration: 5000 });
+  }
+
+  getDocumentErrorMessage(fieldName: string, index: number) {
+    return this.formUtils.getFieldFormArrayErrorMessage(
+      this.form,
+      'documents',
+      fieldName,
+      index
+    );
   }
 
   getErrorMessage(fieldName: string) {

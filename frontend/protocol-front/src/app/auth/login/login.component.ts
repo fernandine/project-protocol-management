@@ -13,6 +13,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   @Input() error: string = "";
   @Input() title: string = "Login"
+  hide = true;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -35,10 +36,14 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe((success) => {
         if (success) {
           this.router.navigate(['/protocols']);
-
+console.log(this.loginForm);
         }
       });
     }
+  }
+
+  onRegister() {
+    this.router.navigate(['/register']);
   }
 
 }

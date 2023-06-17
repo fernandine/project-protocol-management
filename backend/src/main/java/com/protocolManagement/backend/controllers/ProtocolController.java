@@ -11,25 +11,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.sql.Connection;
 import java.util.List;
 
 @Validated
 @RestController
 @RequestMapping(value = "/protocols")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProtocolController {
 
     @Autowired
     private ProtocolService service;
 
+    @Autowired
+    private Connection connection;
+
+//    @GetMapping("/conn")
+//    public String myConn(Model model) {
+//        model.addAttribute("conn", connection != null ? "Conexão ok!" : "Ops...sem conexão");
+//        return "index";
+//    }
+
     @GetMapping
-    public ResponseEntity<List<ProtocolDTO>> findAll() {
-        List<ProtocolDTO> list = service.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<Page<ProtocolDTO>> findAll(Pageable pageable) {
+        Page<ProtocolDTO> page = service.findAll(pageable);
+        return ResponseEntity.ok().body(page);
     }
 
     @GetMapping("/searchBy/{protocolNumber}")

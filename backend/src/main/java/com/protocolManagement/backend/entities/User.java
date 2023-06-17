@@ -32,6 +32,9 @@ public class User implements UserDetails, Serializable {
     @JsonIgnore
     private String password;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Protocol> protocols = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -98,6 +101,14 @@ public class User implements UserDetails, Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Protocol> getProtocols() {
+        return protocols;
+    }
+
+    public void setProtocols(List<Protocol> protocols) {
+        this.protocols = protocols;
     }
 
     public Set<Role> getRoles() {

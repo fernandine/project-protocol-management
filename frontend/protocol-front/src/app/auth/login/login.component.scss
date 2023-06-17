@@ -1,35 +1,67 @@
-.image {
+.page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: auto;
+  object-fit: cover;
+  opacity: 0.5;
+  z-index: -1;
 }
 
-/* Estilos para o card de login */
 .card {
-  max-width: 400px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 24px;
   text-align: center;
-  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
-.card-title {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+.title {
+  font-size: 28px;
+  margin-bottom: 24px;
+  color: var(--primary-color);
 }
 
-/* Estilos para o formulário de login */
 .form-field {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 14px;
 }
 
-.form-input {
-  width: 100%;
-}
-
-.button-container {
+.button-row {
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+  margin-top: 24px;
 }
 
+.link {
+  color: var(--primary-color);
+  font-size: medium;
+  cursor: pointer;
+}
+#footer {
+  position: fixed;
+  font-size: 12px;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  font-style: italic;
+}
+a:link {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+
+}

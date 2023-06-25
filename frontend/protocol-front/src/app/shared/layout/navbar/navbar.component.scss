@@ -2,7 +2,10 @@
 ul.navbar-login {
   list-style: none;
   }
-
+.nav-item {
+  display: flex;
+  flex-direction: row;
+}
   .mat-toolbar {
     display: flex;
     justify-content: space-between;

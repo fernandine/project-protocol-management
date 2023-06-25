@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatToolbarModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    MatCheckboxModule,
+    MatTabsModule,
     MatIconModule,
     MatSidenavModule,
     MatButtonModule,
@@ -43,11 +47,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCardModule,
     MatTableModule,
     MatToolbarModule,
+    MatTabsModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
+    MatCheckboxModule,
     MatIconModule,
     MatFormFieldModule,
     MatListModule,

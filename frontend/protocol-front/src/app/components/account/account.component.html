@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-toolbar color="primary">Dados Pessoais</mat-toolbar>
+
+    <mat-form [formGroup]="userForm">
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" value="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="firstName" value="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>SobreNome</mat-label>
+        <input matInput formControlName="lastName" value="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Celular</mat-label>
+        <input matInput formControlName="mobileNumber" value="email">
+      </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field" hintLabel="Mínimo de 8 caracteres">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" type="password">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field" hintLabel="Mínimo de 8 caracteres">
+          <mat-label>Confirme a Senha</mat-label>
+          <input matInput formControlName="passConfirmation" type="password">
+        </mat-form-field>
+
+        <mat-card-actions class="actions-center">
+          <button mat-raised-button color="primary" (click)="saveUser()">
+            Salvar
+          </button>
+          <button mat-raised-button (click)="cancelEdit()" class="btn-space">
+            Cancelar
+          </button>
+        </mat-card-actions>
+  </mat-form>
+
+  <form [formGroup]="userForm" *ngIf="isEditing">
+
+      <mat-form-field  appearance="outline" class="form-field">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email" type="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="firstName" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput formControlName="lastName" type="text">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"  class="form-field">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="mobileNumber" type="text">
+      </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field" hintLabel="Mínimo de 8 caracteres">
+            <mat-label>Senha</mat-label>
+            <input matInput formControlName="password" type="password">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field" hintLabel="Mínimo de 8 caracteres">
+            <mat-label>Confirme a Senha</mat-label>
+            <input matInput formControlName="passConfirmation" type="password">
+          </mat-form-field>
+
+    <mat-card-actions class="actions-center" >
+      <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="saveUser()">
+        Salvar
+      </button>
+      <button mat-raised-button (click)="isEditing = false" class="btn-space">
+        Cancelar
+      </button>
+    </mat-card-actions>
+
+  </form>
+</mat-card>

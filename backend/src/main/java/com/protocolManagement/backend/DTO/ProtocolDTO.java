@@ -6,7 +6,9 @@ import com.protocolManagement.backend.entities.Protocol;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import lombok.*;
 
+import javax.persistence.Column;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 
@@ -24,5 +26,8 @@ public class ProtocolDTO implements Serializable {
     private String protocolNumber;
     private List<DocumentType> documents;
     private UserDTO user;
+    private Boolean received;
+    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant receivedDate;
 
 }

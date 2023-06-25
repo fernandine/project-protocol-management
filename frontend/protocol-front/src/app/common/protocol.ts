@@ -9,5 +9,7 @@ export interface Protocol {
   protocolNumber: string;
   documents: DocumentType[];
   user: User;
+  received: boolean;
+  receivedDate: Date
 }
 

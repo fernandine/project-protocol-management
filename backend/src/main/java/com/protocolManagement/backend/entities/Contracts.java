@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -18,18 +19,15 @@ import javax.persistence.*;
 @Table(name = "tb_contracts")
 @JsonTypeName("contracts")
 public class Contracts extends DocumentType {
-
+    @NotNull
     @Column(name = "contract_number")
     private String contractNumber;
+    @NotNull
     private String supplier;
+    @NotNull
     @Column(name = "operating_unit")
     private String operatingUnit;
+    @NotNull
     private String cnpj;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @OrderBy("id ASC")
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    @JoinColumn(name = "protocol_id", nullable = false)
-//    private Protocol protocol;
 
 }

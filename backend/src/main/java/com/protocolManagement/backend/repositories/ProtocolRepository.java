@@ -14,4 +14,8 @@ public interface ProtocolRepository extends JpaRepository<Protocol, Long> {
 
     Protocol findByProtocolNumber(String protocolNumber);
 
+    //BUSCA OS RECEBIDOS
+    @Query("SELECT obj FROM Protocol obj WHERE "
+            + "(:notReceived = false OR obj.received = false) ")
+    List<Protocol> find(boolean notReceived);
 }

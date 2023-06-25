@@ -11,14 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.sql.Connection;
-import java.util.List;
 
 @Validated
 @RestController
@@ -31,12 +29,6 @@ public class ProtocolController {
 
     @Autowired
     private Connection connection;
-
-//    @GetMapping("/conn")
-//    public String myConn(Model model) {
-//        model.addAttribute("conn", connection != null ? "Conexão ok!" : "Ops...sem conexão");
-//        return "index";
-//    }
 
     @GetMapping
     public ResponseEntity<Page<ProtocolDTO>> findAll(Pageable pageable) {
@@ -51,7 +43,7 @@ public class ProtocolController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProtocolDTO> findById(@PathVariable @Positive @NotNull Long id) {
+    public ResponseEntity<ProtocolDTO> findById(@PathVariable @Positive Long id) {
         ProtocolDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
@@ -66,8 +58,8 @@ public class ProtocolController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProtocolDTO> update(
-            @PathVariable @Positive @NotNull Long id,
-            @RequestBody @Valid ProtocolDTO dto
+            @PathVariable Long id,
+            @RequestBody ProtocolDTO dto
     ) {
         ProtocolDTO newDto = service.update(id, dto);
         return ResponseEntity.ok().body(newDto);

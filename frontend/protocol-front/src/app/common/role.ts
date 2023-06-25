@@ -1,9 +1,4 @@
-export class Role {
+export interface Role {
   id: number;
   authority: string;
-
-  constructor(id: number, authority: string) {
-    this.id = id;
-    this.authority = authority;
-  }
 }

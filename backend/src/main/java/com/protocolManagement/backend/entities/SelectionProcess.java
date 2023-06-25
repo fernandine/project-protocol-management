@@ -2,6 +2,7 @@ package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @JsonTypeName("selectionProcess")
 public class SelectionProcess extends DocumentType {
 
+    @NotNull
     private String employee;
     private Long registry;
     @Column(name = "vacancy_number")

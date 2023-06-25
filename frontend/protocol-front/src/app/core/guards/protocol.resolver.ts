@@ -28,6 +28,8 @@ export class ProtocolResolver implements Resolve<Protocol> {
       management: '',
       operatingUnit: '',
       protocolNumber: '',
+      received: true,
+      receivedDate: new Date,
       documents: [],
       user: {
         id: '',

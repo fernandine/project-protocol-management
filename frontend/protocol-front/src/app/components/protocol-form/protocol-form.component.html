@@ -57,7 +57,7 @@
           <mat-option value="financialReport">Prestação de Contas Financeira</mat-option>
           <mat-option value="technicalReport">Prestação de Contas Técnica</mat-option>
           <mat-option value="selectionProcess">Processo Seletivo</mat-option>
-          <mat-option value="funcionalFolder">Pasta Funcional</mat-option>
+          <mat-option value="functionalFolder">Pasta Funcional</mat-option>
           <mat-option value="internationalCertification">Certificação Internacional</mat-option>
           <mat-option value="supplies">Suprimentos</mat-option>
           <mat-option value="medicalRecord">Prontuário Médico</mat-option>
@@ -123,34 +123,34 @@
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº do Documento / NF</mat-label>
-          <input matInput type="text" formControlName="numberDocument">
-          <mat-error *ngIf="getFormArray()[i].get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
+          <input matInput type="text" formControlName="numberDocumentAccounting">
+          <mat-error *ngIf="getFormArray()[i].get('numberDocumentAccounting')?.invalid">{{ getErrorMessage("numberDocumentAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Valor Baixado</mat-label>
-          <input matInput type="text" formControlName="invoiceValue">
-          <mat-error *ngIf="getFormArray()[i].get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
+          <input matInput type="text" formControlName="invoiceValueAccounting">
+          <mat-error *ngIf="getFormArray()[i].get('invoiceValueAccounting')?.invalid">{{ getErrorMessage("invoiceValueAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Data de Baixa</mat-label>
-          <input matInput [matDatepicker]="dischargeDatePicker" formControlName="discharge">
+          <input matInput [matDatepicker]="dischargeDatePicker" formControlName="dischargeAccounting">
           <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #dischargeDatePicker></mat-datepicker>
-          <mat-error *ngIf="getFormArray()[i].get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('dischargeAccounting')?.invalid">{{ getErrorMessage("dischargeAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº PAG</mat-label>
-          <input matInput type="text" formControlName="numberPay">
-          <mat-error *ngIf="getFormArray()[i].get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
+          <input matInput type="text" formControlName="numberPayAccounting">
+          <mat-error *ngIf="getFormArray()[i].get('numberPayAccounting')?.invalid">{{ getErrorMessage("numberPayAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Borderô</mat-label>
-          <input matInput type="text" formControlName="bordero">
-          <mat-error *ngIf="getFormArray()[i].get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
+          <input matInput type="text" formControlName="borderoAccounting">
+          <mat-error *ngIf="getFormArray()[i].get('borderoAccounting')?.invalid">{{ getErrorMessage("borderoAccounting") }}</mat-error>
         </mat-form-field>
       </div>
       </div>
@@ -168,34 +168,34 @@
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº do Documento / NF</mat-label>
-          <input matInput type="text" formControlName="numberDocument">
-          <mat-error *ngIf="getFormArray()[i].get('numberDocument')?.invalid">{{ getErrorMessage("numberDocument") }}</mat-error>
+          <input matInput type="text" formControlName="numberDocumentFinancial">
+          <mat-error *ngIf="getFormArray()[i].get('numberDocumentFinancial')?.invalid">{{ getErrorMessage("numberDocumentFinancial") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Valor Baixado</mat-label>
-          <input matInput type="text" formControlName="invoiceValue">
-          <mat-error *ngIf="getFormArray()[i].get('invoiceValue')?.invalid">{{ getErrorMessage("invoiceValue") }}</mat-error>
+          <input matInput type="text" formControlName="invoiceValueFinancial">
+          <mat-error *ngIf="getFormArray()[i].get('invoiceValueFinancial')?.invalid">{{ getErrorMessage("invoiceValueFinancial") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Data de Baixa</mat-label>
-          <input matInput [matDatepicker]="dischargeDatePicker" formControlName="discharge">
+          <input matInput [matDatepicker]="dischargeDatePicker" formControlName="dischargeFinancial">
           <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #dischargeDatePicker></mat-datepicker>
-          <mat-error *ngIf="getFormArray()[i].get('discharge')?.invalid">{{ getErrorMessage("discharge") }}</mat-error>
+          <mat-error *ngIf="getFormArray()[i].get('dischargeFinancial')?.invalid">{{ getErrorMessage("dischargeFinancial") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº PAG</mat-label>
-          <input matInput type="text" formControlName="numberPay">
-          <mat-error *ngIf="getFormArray()[i].get('numberPay')?.invalid">{{ getErrorMessage("numberPay") }}</mat-error>
+          <input matInput type="text" formControlName="numberPayFinancial">
+          <mat-error *ngIf="getFormArray()[i].get('numberPayFinancial')?.invalid">{{ getErrorMessage("numberPayFinancial") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Borderô</mat-label>
-          <input matInput type="text" formControlName="bordero">
-          <mat-error *ngIf="getFormArray()[i].get('bordero')?.invalid">{{ getErrorMessage("bordero") }}</mat-error>
+          <input matInput type="text" formControlName="borderoFinancial">
+          <mat-error *ngIf="getFormArray()[i].get('borderoFinancial')?.invalid">{{ getErrorMessage("borderoFinancial") }}</mat-error>
         </mat-form-field>
       </div>
       </div>
@@ -231,12 +231,8 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Ano</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="dateYear">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="getFormArray()[i].get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
+    <input matInput type="number" formControlName="year" [pattern]="'^\d{4}$'">
+    <mat-error *ngIf="getFormArray()[i].get('year')?.invalid">{{ getErrorMessage("year") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -254,21 +250,21 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="text" formControlName="boxNumberTechReport">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberTechReport')?.invalid">{{ getErrorMessage("boxNumberTechReport") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Projeto</mat-label>
-    <input matInput type="text" formControlName="projectName">
-    <mat-error *ngIf="getFormArray()[i].get('projectName')?.invalid">{{ getErrorMessage("projectName") }}</mat-error>
+    <input matInput type="text" formControlName="projectNameTechReport">
+    <mat-error *ngIf="getFormArray()[i].get('projectNameTechReport')?.invalid">{{ getErrorMessage("projectNameTechReport") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
+      <input matStartDate formControlName="startDateTechReport" placeholder="Início">
+      <input matEndDate formControlName="endDateTechReport" placeholder="Fim">
     </mat-date-range-input>
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -276,7 +272,6 @@
   </mat-form-field>
 </div>
 </div>
-
 <!--OPTION SELECTION PROCESS-->
 <div class="form-inline" *ngSwitchCase="'selectionProcess'">
   <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -290,38 +285,38 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Funcionário</mat-label>
-    <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
+    <input matInput type="text" formControlName="employeeSelectionProcess">
+    <mat-error *ngIf="getFormArray()[i].get('employeeSelectionProcess')?.invalid">{{ getErrorMessage("employeeSelectionProcess") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>RE - Funcionário</mat-label>
-    <input matInput type="text" formControlName="registry">
-    <mat-error *ngIf="getFormArray()[i].get('registry')?.invalid">{{ getErrorMessage("registry") }}</mat-error>
+    <input matInput type="text" formControlName="registrySelectionProcess">
+    <mat-error *ngIf="getFormArray()[i].get('registrySelectionProcess')?.invalid">{{ getErrorMessage("registrySelectionProcess") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Vaga</mat-label>
-    <input matInput type="text" formControlName="vacancyNumber">
-    <mat-error *ngIf="getFormArray()[i].get('vacancyNumber')?.invalid">{{ getErrorMessage("vacancyNumber") }}</mat-error>
+    <input matInput type="text" formControlName="vacancyNumberSelectionProcess">
+    <mat-error *ngIf="getFormArray()[i].get('vacancyNumberSelectionProcess')?.invalid">{{ getErrorMessage("vacancyNumberSelectionProcess") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nome da Vaga</mat-label>
-    <input matInput type="text" formControlName="vacancyName">
-    <mat-error *ngIf="getFormArray()[i].get('vacancyName')?.invalid">{{ getErrorMessage("vacancyName") }}</mat-error>
+    <input matInput type="text" formControlName="vacancyNameSelectionProcess">
+    <mat-error *ngIf="getFormArray()[i].get('vacancyNameSelectionProcess')?.invalid">{{ getErrorMessage("vacancyNameSelectionProcess") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="text" formControlName="boxNumberSelectionProcess">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberSelectionProcess')?.invalid">{{ getErrorMessage("boxNumberSelectionProcess") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
 
-<!--OPTION FUNCIONAL FOLDER-->
-<div class="form-inline" *ngSwitchCase="'funcionalFolder'">
+<!--OPTION FUNCTIONAL FOLDER-->
+<div class="form-inline" *ngSwitchCase="'functionalFolder'">
   <div style="display: flex; justify-content: space-between; width: 100%;">
     <mat-form-field class="full-width">
       <mat-label>Entidade do Solicitante</mat-label>
@@ -333,32 +328,28 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Status do Processo</mat-label>
-    <mat-select formControlName="status">
+    <mat-select formControlName="statusFunctionalFolder">
       <mat-option *ngFor="let statusFunctionalFolder of statusFunctionalFolder" [value]="statusFunctionalFolder">{{ statusFunctionalFolder }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="getFormArray()[i].get('status')?.invalid">{{ getErrorMessage("status") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('statusFunctionalFolder')?.invalid">{{ getErrorMessage("statusFunctionalFolder") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>RE - Funcionário</mat-label>
-    <input matInput type="text" formControlName="registryEmployee">
-    <mat-error *ngIf="getFormArray()[i].get('registryEmployee')?.invalid">{{ getErrorMessage("registryEmployee") }}</mat-error>
+    <input matInput type="text" formControlName="registryEmployeeFunctionalFolder">
+    <mat-error *ngIf="getFormArray()[i].get('registryEmployeeFunctionalFolder')?.invalid">{{ getErrorMessage("registryEmployeeFunctionalFolder") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="number" formControlName="boxNumberFunctionalFolder">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberFunctionalFolder')?.invalid">{{ getErrorMessage("boxNumberFunctionalFolder") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
-    <mat-label>Desligamento</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="shutdown">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="getFormArray()[i].get('shutdown')?.invalid">{{ getErrorMessage("shutdown") }}</mat-error>
+    <mat-label>Ano do Desligamento</mat-label>
+    <input matInput type="number" formControlName="shutdownFunctionalFolder">
+    <mat-error *ngIf="getFormArray()[i].get('shutdownFunctionalFolder')?.invalid">{{ getErrorMessage("shutdownFunctionalFolder") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -381,20 +372,20 @@
     </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="number" formControlName="boxNumberIntlCert">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberIntlCert')?.invalid">{{ getErrorMessage("boxNumberIntlCert") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº do Processo</mat-label>
-    <input matInput type="text" formControlName="numberProcess">
-    <mat-error *ngIf="getFormArray()[i].get('numberProcess')?.invalid">{{ getErrorMessage("numberProcess") }}</mat-error>
+    <input matInput type="number" formControlName="processNumberIntlCert">
+    <mat-error *ngIf="getFormArray()[i].get('processNumberIntlCert')?.invalid">{{ getErrorMessage("processNumberIntlCert") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Empresa</mat-label>
-    <input matInput type="text" formControlName="company">
-    <mat-error *ngIf="getFormArray()[i].get('company')?.invalid">{{ getErrorMessage("company") }}</mat-error>
+    <input matInput type="text" formControlName="companyIntlCert">
+    <mat-error *ngIf="getFormArray()[i].get('companyIntlCert')?.invalid">{{ getErrorMessage("companyIntlCert") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -409,21 +400,19 @@
       </mat-select>
       <mat-error *ngIf="getFormArray()[i].get('entity')?.invalid">{{ getErrorMessage("entity") }}</mat-error>
     </mat-form-field>
+
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Tipo do Processo</mat-label>
-    <mat-select formControlName="supplieType">
+    <mat-select formControlName="supplieTypeSupplies">
       <mat-option *ngFor="let supplieType of supplieTypeOptions" [value]="supplieType">{{ supplieType }}</mat-option>
     </mat-select>
-    <mat-error *ngIf="getFormArray()[i].get('supplieType')?.invalid">{{ getErrorMessage("supplieType") }}</mat-error>
+    <mat-error *ngIf="getFormArray()[i].get('supplieTypeSupplies')?.invalid">{{ getErrorMessage("supplieTypeSupplies") }}</mat-error>
   </mat-form-field>
+
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Ano</mat-label>
-    <input matInput [matDatepicker]="dischargeDatePicker" formControlName="dateYear">
-
-    <mat-datepicker-toggle matSuffix [for]="dischargeDatePicker"></mat-datepicker-toggle>
-    <mat-hint>YYYY</mat-hint>
-    <mat-datepicker #dischargeDatePicker></mat-datepicker>
-    <mat-error *ngIf="getFormArray()[i].get('dateYear')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
+    <input matInput type="number" formControlName="dateYearSupplies" [pattern]="'^\d{4}$'">
+    <mat-error *ngIf="getFormArray()[i].get('dateYearSupplies')?.invalid">{{ getErrorMessage("dateYearSupplies") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -440,21 +429,21 @@
     </mat-form-field>
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="number" formControlName="boxNumberMedicalRecord">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberMedicalRecord')?.invalid">{{ getErrorMessage("boxNumberMedicalRecord") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nome do Funcionário</mat-label>
-    <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
+    <input matInput type="text" formControlName="employeeMedicalRecord">
+    <mat-error *ngIf="getFormArray()[i].get('employeeMedicalRecord')?.invalid">{{ getErrorMessage("employeeMedicalRecord") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Início">
-      <input matEndDate placeholder="Fim">
+      <input matStartDate formControlName="startDateMedicalRecord" placeholder="Início">
+      <input matEndDate formControlName="endDateMedicalRecord" placeholder="Fim">
     </mat-date-range-input>
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -476,26 +465,27 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
-    <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
+    <input matInput type="text" formControlName="boxNumberFiscal">
+    <mat-error *ngIf="getFormArray()[i].get('boxNumberFiscal')?.invalid">{{ getErrorMessage("boxNumberFiscal") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Tipo de Guia</mat-label>
-    <input matInput type="text" formControlName="guideType">
-    <mat-error *ngIf="getFormArray()[i].get('guideType')?.invalid">{{ getErrorMessage("guideType") }}</mat-error>
+    <input matInput type="text" formControlName="guideTypeFiscal">
+    <mat-error *ngIf="getFormArray()[i].get('guideTypeFiscal')?.invalid">{{ getErrorMessage("guideTypeFiscal") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Período</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date">
-      <input matEndDate placeholder="End date">
+      <input matStartDate formControlName="startDateFiscal" placeholder="Início">
+      <input matEndDate formControlName="endDateFiscal" placeholder="Fim">
     </mat-date-range-input>
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
   </mat-form-field>
+
 </div>
 </div>
     </div>

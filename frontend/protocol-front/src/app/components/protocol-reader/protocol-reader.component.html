@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-content class="container">
+    <h1>Digite o código do protocolo recebido:</h1>
+
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" class="full-width">
+        <input matInput type="text" formControlName="protocolNumber" placeholder="DOC...">
+        <mat-error *ngIf="form.controls['protocolNumber'].invalid">O código do protocolo é obrigatório</mat-error>
+      </mat-form-field>
+
+      <mat-checkbox name="isAgreed" #isAgreedCheckbox>
+        Eu me comprometo a cumprir todas as obrigações.
+      </mat-checkbox>
+
+
+    </form>
+    <button mat-raised-button class="actions-center" color="primary" (click)="markAsReceived()"
+    [disabled]="form.invalid || !isAgreedCheckbox.checked">
+      Enviar
+    </button>
+  </mat-card-content>
+</mat-card>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../common/user';
 import { environment } from 'src/environments/environment';
+import { Role } from '../common/role';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserService {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  getUserById(id: number):Observable<User> {
+  getUserById(id: string):Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${id}`);
   }
 
@@ -25,11 +26,11 @@ export class UserService {
     return this.http.post(`${this.userUrl}`, user);
   }
 
-  updateUser(id: number, value: any): Observable<any> {
+  updateUser(id: string, value: any): Observable<any> {
     return this.http.put(`${this.userUrl}/${id}`, value);
   }
 
-  deleteUser(id: number): Observable<any> {
+  deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.userUrl}/${id}`);
   }
 

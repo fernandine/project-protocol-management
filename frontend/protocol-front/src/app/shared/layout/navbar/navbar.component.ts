@@ -32,7 +32,15 @@ export class NavbarComponent {
     const currentUser = this.authService.getCurrentUser();
     return currentUser ? currentUser.firstName : '';
   }
-
+  account() {
+    this.router.navigate(['/account']);
+  }
+  admin() {
+    this.router.navigate(['/admin']);
+  }
+  getProtocols(){
+    this.router.navigate(['/protocols']);
+  }
   login() {
     this.router.navigate(['/auth-login']);
   }

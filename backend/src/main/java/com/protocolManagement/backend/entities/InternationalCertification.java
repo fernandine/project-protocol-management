@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,11 +13,13 @@ import java.util.Objects;
 @Table(name = "tb_international_certification")
 @JsonTypeName("internationalCertification")
 public class InternationalCertification extends DocumentType {
-
+    @NotNull
     @Column(name = "box_number")
     private Long boxNumber;
+    @NotNull
     @Column(name = "process_number")
     private String processNumber;
+    @NotNull
     private String company;
 
     public InternationalCertification(){}

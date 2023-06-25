@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import com.protocolManagement.backend.entities.enums.StatusFunctionalFolder;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.time.Instant;
 
@@ -12,11 +13,15 @@ import java.time.Instant;
 @JsonTypeName("functionalFolder")
 public class FunctionalFolder extends DocumentType {
 
+    @NotNull
     private StatusFunctionalFolder status;
+    @NotNull
     @Column(name = "registry_employee")
     private String registryEmployee;
+    @NotNull
     @Column(name = "box_number")
     private Long boxNumber;
+    @NotNull
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant shutdown; //ano do desligamento
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {  map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
+import { Role } from '../common/role';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,9 @@ export class AuthService {
         const email = response.email;
         const lastName = response.lastName;
         const mobileNumber = response.mobileNumber;
+        const roles = response.roles;
         if (token) {
-          const currentUser = { username, token, id, email, lastName, firstName, mobileNumber};
+          const currentUser = { username, token, id, email, lastName, firstName, mobileNumber, roles};
           this.storageService.setItem('currentUser', currentUser);
           return true;
         } else {
@@ -54,7 +56,7 @@ export class AuthService {
     firstName: string;
     mobileNumber: string;
     email: string;
-
+    roles: string;
   } | null {
     const currentUser = this.storageService.getItem('currentUser');
     //console.log('currentUser:', currentUser);
@@ -67,8 +69,8 @@ export class AuthService {
         id: currentUser.id || '',
         lastName: currentUser.lastName || '',
         firstName: currentUser.firstName || '',
-        mobileNumber: currentUser.mobileNumber || ''
-
+        mobileNumber: currentUser.mobileNumber || '',
+        roles: currentUser.roles || ''
       };
     } else {
       return null;

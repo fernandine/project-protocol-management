@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -14,10 +15,13 @@ import java.util.Objects;
 @JsonTypeName("technicalReport")
 public class TechnicalReport extends DocumentType {
 
+    @NotNull
     @Column(name = "box_number")
     private Long boxNumber;
+    @NotNull
     @Column(name = "project_name")
     private String projectName;
+    @NotNull
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant period;
 

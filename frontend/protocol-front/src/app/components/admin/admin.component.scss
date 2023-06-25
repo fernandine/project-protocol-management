@@ -1,0 +1,66 @@
+mat-card {
+  max-width: 60%;
+  margin: 2em auto;
+  text-align: center;
+
+}
+mat-toolbar {
+  margin-bottom: 20px;
+}
+.received-yes {
+  /* Estilos para linhas com received = true */
+  background-color: rgba(149, 231, 149, 0.527);
+}
+
+.received-no {
+  /* Estilos para linhas com received = false */
+  background-color: rgba(231, 149, 149, 0.562);
+}
+mat-tab-group {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.actions-center {
+  justify-content: center;
+  margin: 20px 0;
+}
+.form-inline mat-form-field {
+  margin: 0 10px;
+}
+.full-width {
+  width: 100%;
+}
+
+.min-width {
+  min-width: 150px;
+  width: auto;
+}
+
+.btn-space {
+  margin-left: 5px;
+}
+h2 {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-bottom: 10px;
+}
+
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mat-column-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-user {
+  margin-top: 30px;
+}

@@ -115,9 +115,11 @@ public class UserService implements UserDetailsService {
         entity.setMobileNumber(dto.getMobileNumber());
 
         entity.getRoles().clear();
-        for (RoleDTO roleDto : dto.getRoles()) {
-            Role role = roleRepository.getReferenceById(roleDto.getId());
-            entity.getRoles().add(role);
+        if (dto.getRoles() != null) {
+            for (RoleDTO roleDto : dto.getRoles()) {
+                Role role = roleRepository.getReferenceById(roleDto.getId());
+                entity.getRoles().add(role);
+            }
         }
     }
 

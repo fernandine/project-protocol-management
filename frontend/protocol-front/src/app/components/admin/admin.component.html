@@ -1,0 +1,90 @@
+<mat-tab-group>
+  <mat-tab label="Controle de Usuários">
+
+    <button class="btn-user" mat-raised-button color="primary" (click)="addUser()">Novo Usuário</button>
+
+    <mat-table [dataSource]="users">
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef>Sobrenome</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mobileNumber">
+        <mat-header-cell *matHeaderCellDef>Celular</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.mobileNumber }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="roles">
+        <mat-header-cell *matHeaderCellDef>Perfil</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ getRoles(user.roles) | role }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <button mat-icon-button color="warn" (click)="onRemove(user)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['email', 'firstName', 'lastName', 'mobileNumber', 'roles', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['email', 'firstName', 'lastName', 'mobileNumber', 'roles', 'actions']"></mat-row>
+    </mat-table>
+
+    <ng-template #loading>
+      <div class="loading-overlay">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+
+
+  </mat-tab>
+
+
+  <mat-tab label="Confirmação de Protocolos">
+    <mat-card>
+      <mat-card-content>
+        <mat-table mat-table [dataSource]="protocols.content">
+          <ng-container matColumnDef="user">
+            <mat-header-cell *matHeaderCellDef>Usuário</mat-header-cell>
+            <mat-cell *matCellDef="let protocol">{{ protocol.user?.firstName }} {{ protocol.user?.lastName }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="protocolNumber">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Número do Protocolo</mat-header-cell>
+            <mat-cell *matCellDef="let protocol">{{ protocol.protocolNumber }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="received">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Confirmado?</mat-header-cell>
+            <mat-cell *matCellDef="let protocol" [ngClass]="{'received-yes': protocol.received, 'received-no': !protocol.received}">
+              {{ protocol.received ? 'Sim' : 'Não' }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="receivedDate">
+          <mat-header-cell mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+          <mat-cell *matCellDef="let protocol">{{ protocol.receivedDate | date:'dd/MM/yyyy - HH:mm' }}</mat-cell>
+        </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'received-yes': row.received, 'received-no': !row.received}"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+</mat-tab-group>
+
+

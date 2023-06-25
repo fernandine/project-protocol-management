@@ -1,17 +1,15 @@
 package com.protocolManagement.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.protocolManagement.backend.DTO.UserDTO;
 import com.protocolManagement.backend.entities.enums.EntityType;
 
 import javax.persistence.*;
 
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,9 +21,9 @@ public class Protocol implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("_id")
     private Long id;
-
+    @NotNull
     private String protocolNumber;
-
+    @NotNull
     @Enumerated(EnumType.STRING)
     private EntityType institution;
     @NotBlank
@@ -33,26 +31,31 @@ public class Protocol implements Serializable {
     private String management;
     @NotNull
     private String operatingUnit;
-
     @NotNull
-    @NotEmpty
-    @Valid
     @OneToMany(mappedBy = "protocol", cascade = CascadeType.ALL)
     private List<DocumentType> documents;
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotNull
+    private Boolean received;
+    @NotNull
+    @Column (name = "received_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant receivedDate;
     public Protocol() {}
 
-    public Protocol(Long id, String protocolNumber, EntityType institution, String management, String operatingUnit, User user) {
+    public Protocol(Long id, String protocolNumber, EntityType institution, String management,
+                    String operatingUnit, User user, Boolean received, Instant receivedDate) {
         this.id = id;
         this.protocolNumber = protocolNumber;
         this.institution = institution;
         this.management = management;
         this.operatingUnit = operatingUnit;
         this.user = user;
+        this.received = received;
+        this.receivedDate = receivedDate;
     }
 
     public Long getId() {
@@ -109,6 +112,22 @@ public class Protocol implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean isReceived() {
+        return received;
+    }
+
+    public void setReceived(Boolean received) {
+        this.received = received;
+    }
+
+    public Instant getReceivedDate() {
+        return receivedDate;
+    }
+
+    public void setReceivedDate(Instant receivedDate) {
+        this.receivedDate = receivedDate;
     }
 
     @Override

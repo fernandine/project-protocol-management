@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.time.Instant;
 
@@ -20,16 +21,13 @@ import java.time.Instant;
 @Table(name = "tb_collective_labor_agreement")
 @JsonTypeName("collectiveLaborAgreement")
 public class CollectiveLaborAgreement extends DocumentType {
-
+    @NotNull
     @Column(name = "box_number")
     private Long boxNumber;
-
+    @NotNull
     private String company;
+    @NotNull
     @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dateYear;
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @OrderBy("id ASC")
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    @JoinColumn(name = "protocol_id", nullable = false)
-//    private Protocol protocol;
+
 }

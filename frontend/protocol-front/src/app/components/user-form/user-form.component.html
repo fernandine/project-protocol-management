@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-form [formGroup]="userForm" class="min-width">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" value="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="firstName" value="firstName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>SobreNome</mat-label>
+      <input matInput formControlName="lastName" value="lastName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Celular</mat-label>
+      <input matInput formControlName="mobileNumber" value="mobileNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" value="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Perfil</mat-label>
+      <mat-select formControlName="roles">
+        <mat-option *ngFor="let role of roles" [value]="role.authority">{{ role.authority }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-card-actions class="actions-center">
+    <button mat-raised-button color="primary" (click)="newUser()">
+      Salvar
+    </button>
+    <button mat-raised-button (click)="cancelEdit()" class="btn-space">
+      Cancelar
+    </button>
+  </mat-card-actions>
+
+
+  </mat-form>
+</div>

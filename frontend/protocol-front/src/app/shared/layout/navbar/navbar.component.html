@@ -13,14 +13,20 @@
             <span>Criar conta</span>
           </a>
         </div>
+        <a mat-button style="font-size: large;" (click)="getProtocols()">
+          <span>Protocolos</span>
+        </a>
 
         <div *ngIf="(isLoggedIn)">
-          <a mat-button routerLink="/account">
+          <a mat-button (click)="admin()" style="margin-right: 100px; font-size: large;">
+            <span>Administrador</span>
+          </a>
+          <a mat-button (click)="account()">
             <mat-icon>person</mat-icon>
             <a>Olá, {{ getUsername() }}</a>
           </a>
 
-          <a mat-button (click)="logout()">Logout</a>
+          <a mat-button (click)="logout()">Sair</a>
         </div>
       </li>
       <li class="nav-item px-5">

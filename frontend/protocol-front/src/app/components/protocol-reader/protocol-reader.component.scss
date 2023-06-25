@@ -1,0 +1,23 @@
+mat-card {
+  max-width: 50%;
+  margin: 10em auto;
+  text-align: center;
+  background-color: rgba(205, 209, 209, 0.507);
+}
+.container {
+  margin: 30px 0;
+}
+.full-width {
+  width: 70%;
+
+}
+
+mat-checkbox {
+  margin: 10px;
+  font-size: 16px;
+}
+.actions-center {
+  flex-direction: column;
+  justify-content: center;
+  margin: 2em 0;
+}

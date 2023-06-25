@@ -1,7 +1,6 @@
 package com.protocolManagement.backend.services;
 
 import com.protocolManagement.backend.DTO.ProtocolDTO;
-import com.protocolManagement.backend.DTO.UserDTO;
 import com.protocolManagement.backend.entities.DocumentType;
 import com.protocolManagement.backend.entities.Protocol;
 import com.protocolManagement.backend.entities.User;
@@ -26,8 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,11 +55,6 @@ public class ProtocolService {
         );
         return new PageImpl<>(protocolDTOs, pageable, page.getTotalElements());
     }
-    @Transactional(readOnly = true)
-    public ProtocolDTO getAuthUser() {
-        User user = authService.authenticated();
-        return modelMapper.map(user, ProtocolDTO.class);
-    }
 
     @Transactional(readOnly = true)
     public ProtocolDTO findByProtocol(String protocolNumber) {
@@ -92,7 +84,7 @@ public class ProtocolService {
     }
 
     @Transactional
-    public ProtocolDTO update(@Positive @NotNull Long id, ProtocolDTO dto) {
+    public ProtocolDTO update( Long id, ProtocolDTO dto) {
         try {
             Protocol entity = repository.getReferenceById(id);
 
@@ -119,6 +111,14 @@ public class ProtocolService {
         }
     }
 
+    @Transactional(readOnly = true)
+    public List<ProtocolDTO> findByReceived(boolean notReceived) {
+        List<Protocol> list = repository.find(notReceived);
+        return list.stream()
+                .map(protocol -> modelMapper.map(protocol, ProtocolDTO.class))
+                .collect(Collectors.toList());
+    }
+
 //    private String generateProtocolNumber(User user ) {
 //        return "DOC" + user.getId() + "-" +
 //                LocalDateTime.now().format(
@@ -132,6 +132,8 @@ public class ProtocolService {
         entity.setOperatingUnit(dto.getOperatingUnit());
         entity.setManagement(dto.getManagement());
         entity.setProtocolNumber(dto.getProtocolNumber());
+        entity.setReceived(dto.getReceived());
+        entity.setReceivedDate(dto.getReceivedDate());
 
         if (dto.getUser() != null) {
             User user = new User();

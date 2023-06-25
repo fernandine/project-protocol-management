@@ -16,6 +16,17 @@ import { SupplieType } from 'src/app/common/enums/supplie-type.enum';
 import { DocumentType } from 'src/app/common/document-type';
 import { FormUtilsService } from 'src/app/services/form-utils.service';
 import { AuthService } from '../../services/auth.service';
+import { Accounting } from 'src/app/common/accounting';
+import { CollectiveLaborAgreement } from 'src/app/common/collective-labor-agreement';
+import { Contracts } from 'src/app/common/contracts';
+import { FinancialReport } from 'src/app/common/financial-report';
+import { FiscalDocument } from 'src/app/common/fiscal-document';
+import { FunctionalFolder } from 'src/app/common/functional-folder';
+import { InternationalCertification } from 'src/app/common/international-certification';
+import { MedicalRecord } from 'src/app/common/medical-record';
+import { SelectionProcess } from 'src/app/common/selection-process';
+import { Supplies } from 'src/app/common/supplies';
+import { TechnicalReport } from 'src/app/common/technical-report';
 
 @Component({
   selector: 'app-protocol-form',
@@ -23,7 +34,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./protocol-form.component.scss'],
 })
 export class ProtocolFormComponent {
-
   form!: FormGroup;
   entityTypes = Object.values(EntityType);
   statusFunctionalFolder = Object.values(StatusFunctionalFolder);
@@ -41,16 +51,14 @@ export class ProtocolFormComponent {
 
   ngOnInit(): void {
     const protocol: Protocol = this.route.snapshot.data['protocol'];
-    console.log('number'+ protocol.protocolNumber);
+    console.log('number' + protocol.protocolNumber);
 
     this.form = this.formBuilder.group({
       _id: [protocol._id],
       institution: [protocol.institution, [Validators.required]],
-      //protocolNumer: [protocol.protocolNumber],
       management: [protocol.management, [Validators.required]],
       operatingUnit: [protocol.operatingUnit, [Validators.required]],
       documents: this.formBuilder.array(this.retrieveDocuments(protocol)),
-      //user: [protocol.user]
     });
   }
 
@@ -69,35 +77,78 @@ export class ProtocolFormComponent {
   private createDocument(
     document: DocumentType = { id: '', entity: EntityType.CIEMG, type: '' }
   ) {
+    const accounting = document as Accounting;
+    const collectiveLaborAgreement =
+      document as unknown as CollectiveLaborAgreement;
+    const contracts = document as unknown as Contracts;
+    const financialReport = document as unknown as FinancialReport;
+    const fiscalDocument = document as unknown as FiscalDocument;
+    const functionalFolder = document as unknown as FunctionalFolder;
+    const intlCert = document as unknown as InternationalCertification;
+    const medicalRecord = document as unknown as MedicalRecord;
+    const selectionProcess = document as unknown as SelectionProcess;
+    const supplies = document as unknown as Supplies;
+    const techReport = document as unknown as TechnicalReport;
+
     return this.formBuilder.group({
       id: [document.id],
       entity: [document.entity],
       type: [document.type],
-      numberDocument: [null],
-      invoiceValue: [null],
-      discharge: [null],
-      numberPay: [null],
-      bordero: [null],
-      supplieType: [null],
-      contractNumber: [''],
-      supplier: [''],
-      operatingUnit: [''],
-      cnpj: [''],
-      startDate: [null],
-      endDate: [null],
-      boxNumber: [null],
-      processNumber: [null],
-      company: [''],
-      dateYear: [null],
-      guideType: [''],
-      status: [''],
-      registryEmployee: [''],
-      shutdown: [''],
-      employee: [''],
-      registry: [''],
-      vacancyNumber: [''],
-      vacancyName: [''],
-      projectName: [''],
+
+      numberDocumentAccounting: [accounting.numberDocument || null],
+      invoiceValueAccounting: [accounting.invoiceValue || null],
+      dischargeAccounting: [accounting.discharge || null],
+      numberPayAccounting: [accounting.numberPay || null],
+      borderoAccounting: [accounting.bordero || null],
+
+      boxNumber: [collectiveLaborAgreement.boxNumber || null],
+      processNumber: [collectiveLaborAgreement.processNumber || null],
+      company: [collectiveLaborAgreement.company || ''],
+      dateYear: [collectiveLaborAgreement.dateYear || null],
+
+      contractNumber: [contracts.contractNumber || ''],
+      supplier: [contracts.supplier || ''],
+      operatingUnit: [contracts.operatingUnit || ''],
+      cnpj: [contracts.cnpj || ''],
+
+      numberDocumentFinancial: [financialReport.numberDocument || null],
+      invoiceValueFinancial: [financialReport.invoiceValue || null],
+      dischargeFinancial: [financialReport.discharge || null],
+      numberPayFinancial: [financialReport.numberPay || null],
+      borderoFinancial: [financialReport.bordero || null],
+
+      boxNumberFiscal: [fiscalDocument.boxNumber || null],
+      guideTypeFiscal: [fiscalDocument.guideType || null],
+      startDateFiscal: [fiscalDocument.startDate || new Date()],
+      endDateFiscal: [fiscalDocument.endDate || new Date()],
+
+      statusFunctionalFolder: [functionalFolder.status || null],
+      registryEmployeeFunctionalFolder: [functionalFolder.registryEmployee || null],
+      boxNumberFunctionalFolder: [functionalFolder.boxNumber || null],
+      shutdownFunctionalFolder: [functionalFolder.shutdown || null],
+
+      boxNumberIntlCert: [intlCert.boxNumber || null],
+      processNumberIntlCert: [intlCert.processNumber || null],
+      companyIntlCert: [intlCert.company || null],
+
+      boxNumberMedicalRecord: [medicalRecord.boxNumber || null],
+      employeeMedicalRecord: [medicalRecord.employee || ''],
+      startDateMedicalRecord: [medicalRecord.startDate || new Date],
+      endDateMedicalRecord: [medicalRecord.endDate || new Date],
+
+      employeeSelectionProcess: [selectionProcess.employee || null],
+      registrySelectionProcess: [selectionProcess.registry || null],
+      vacancyNumberSelectionProcess: [selectionProcess.vacancyNumber || null],
+      vacancyNameSelectionProcess: [selectionProcess.vacancyName || null],
+      boxNumberSelectionProcess: [selectionProcess.boxNumber || null],
+
+      supplieTypeSupplies: [supplies.supplieType || null],
+      dateYearSupplies: [supplies.dateYear || null],
+
+      boxNumberTechReport: [techReport.boxNumber || null],
+      projectNameTechReport: [techReport.projectName || null],
+      startDateTechReport: [techReport.startDate?.toISOString() || null],
+      endDateTechReport: [techReport.endDate?.toISOString() || null],
     });
   }
 
@@ -127,21 +178,18 @@ export class ProtocolFormComponent {
           firstName: currentUser.firstName,
           lastName: currentUser.lastName,
           mobileNumber: currentUser.mobileNumber,
-          roles: []
+          roles: [],
         };
-
-
       }
       // Salva o registro de protocolo com o número do protocolo gerado
       this.service.save(this.service.generateProtocolNumber(record)).subscribe({
         next: () => this.onSuccess(),
-        error: () => this.onError()
+        error: () => this.onError(),
       });
     } else {
       this.formUtils.validateAllFormFields(this.form);
     }
   }
-
 
   onCancel() {
     this.location.back();

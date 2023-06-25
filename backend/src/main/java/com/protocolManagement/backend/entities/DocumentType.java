@@ -3,6 +3,7 @@ package com.protocolManagement.backend.entities;
 import com.fasterxml.jackson.annotation.*;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,6 +29,7 @@ public class DocumentType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     @Enumerated(EnumType.STRING)
     private EntityType entity;
 

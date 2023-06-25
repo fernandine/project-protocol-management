@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.time.Instant;
 
@@ -31,22 +32,20 @@ import java.time.Instant;
 @Table(name = "tb_accounting")
 @JsonTypeName("accounting")
 public class Accounting extends DocumentType {
-
+    @NotNull
     @Column(name = "number_document")
     private Long numberDocument;
+    @NotNull
     @Column(name = "invoice_value")
     private Double invoiceValue;
+    @NotNull
     @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant discharge;
+    @NotNull
     @Column(name = "number_pay")
     private Long numberPay;
+    @NotNull
     private Long bordero;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @OrderBy("id ASC")
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//    @JoinColumn(name = "protocol_id", nullable = false)
-//    private Protocol protocol;
 
 }
 

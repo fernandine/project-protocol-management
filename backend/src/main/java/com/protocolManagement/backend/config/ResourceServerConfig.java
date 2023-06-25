@@ -34,12 +34,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private JwtTokenStore tokenStore;
 
     private static final String[] USER = {
-
             "/oauth/token",
-            "/h2-console/**",
             "/register/**",
-            "/users/**",
-            "/protocols/**",
+            "/protocol-reader/**"
     };
 
     private static final String[] OPERATOR = {

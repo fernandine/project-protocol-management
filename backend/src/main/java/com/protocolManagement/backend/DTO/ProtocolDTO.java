@@ -18,7 +18,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class ProtocolDTO implements Serializable {
 
-    @JsonProperty("_id")
     private Long id;
     private EntityType institution;
     private String management;

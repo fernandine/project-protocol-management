@@ -22,16 +22,20 @@ public class TechnicalReport extends DocumentType {
     @Column(name = "project_name")
     private String projectName;
     @NotNull
-    @Column (columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant period;
+    @Column(name = "start_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant startDate;
+    @NotNull
+    @Column(name = "end_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant endDate;
 
     public TechnicalReport(){}
 
-    public TechnicalReport(Long id, EntityType entity, Protocol protocol, Long boxNumber, String projectName, Instant period) {
+    public TechnicalReport(Long id, EntityType entity, Protocol protocol, Long boxNumber, String projectName, Instant startDate, Instant endDate) {
         super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.projectName = projectName;
-        this.period = period;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Long getBoxNumber() {
@@ -50,12 +54,19 @@ public class TechnicalReport extends DocumentType {
         this.projectName = projectName;
     }
 
-    public Instant getPeriod() {
-        return period;
+    public Instant getStartDate() {
+        return startDate;
     }
 
-    public void setPeriod(Instant period) {
-        this.period = period;
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
     }
 
+    public Instant getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Instant endDate) {
+        this.endDate = endDate;
+    }
 }

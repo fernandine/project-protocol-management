@@ -68,16 +68,12 @@ onPaginatorChange(event: PageEvent): void {
     });
   }
 
-  onPdf() {
-    this.router.navigate(['generate-pdf'], { relativeTo: this.route });
-  }
-
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
   onEdit(protocol: Protocol) {
-    this.router.navigate(['edit', protocol._id], { relativeTo: this.route });
+    this.router.navigate(['edit', protocol.id], { relativeTo: this.route });
   }
 
   onRemove(protocol: Protocol) {
@@ -87,7 +83,7 @@ onPaginatorChange(event: PageEvent): void {
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.protocolService.remove(protocol._id).subscribe(
+        this.protocolService.remove(protocol.id).subscribe(
           () => {
             this.refresh();
             this.snackBar.open('Protocolo removido com sucesso!', 'X', {

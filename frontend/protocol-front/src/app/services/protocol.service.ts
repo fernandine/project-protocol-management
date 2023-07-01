@@ -26,20 +26,20 @@ export class ProtocolService {
     return this.httpClient.get<Page<Protocol>>(this.protUrl, { params });
   }
 
-  loadById(id: string) {
+  loadById(id: number) {
     if (this.protocol.length > 0) {
-      const record = this.protocol.find(protocol => `${protocol._id}` === `${id}`);
+      const record = this.protocol.find(protocol => `${protocol.id}` === `${id}`);
       return record != null ? of(record) : this.getById(id);
     }
     return this.getById(id);
   }
 
-  private getById(id: string) {
+  private getById(id: number) {
     return this.httpClient.get<Protocol>(`${this.protUrl}/${id}`).pipe(first());
   }
 
   save(record: Partial<Protocol>) {
-    if (record._id) {
+    if (record.id) {
       return this.update(record);
     }
     const recordWithProtocolNumber = this.generateProtocolNumber(record);
@@ -51,7 +51,7 @@ export class ProtocolService {
   }
 
   private update(record: Partial<Protocol>) {
-    return this.httpClient.put<Protocol>(`${this.protUrl}/${record._id}`, record).pipe(first());
+    return this.httpClient.put<Protocol>(`${this.protUrl}/${record.id}`, record).pipe(first());
   }
 
   generateProtocolNumber(record: Partial<Protocol>): Partial<Protocol> {
@@ -63,7 +63,7 @@ export class ProtocolService {
     return record;
   }
 
-  remove(id: string) {
+  remove(id: number) {
     return this.httpClient.delete(`${this.protUrl}/${id}`).pipe(first());
   }
 

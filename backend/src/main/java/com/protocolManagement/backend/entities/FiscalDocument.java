@@ -20,17 +20,20 @@ public class FiscalDocument extends DocumentType {
     @Column(name = "guide_type")
     private String guideType;
     @NotNull
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant period;
+    @Column(name = "start_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant startDate;
+    @NotNull
+    @Column(name = "end_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant endDate;
 
     public FiscalDocument(){}
 
-    public FiscalDocument(Long id, EntityType entity, Protocol protocol, Long boxNumber,
-                          String guideType, Instant period) {
+    public FiscalDocument(Long id, EntityType entity, Protocol protocol, Long boxNumber, String guideType, Instant startDate, Instant endDate) {
         super(id, entity, protocol);
         this.boxNumber = boxNumber;
         this.guideType = guideType;
-        this.period = period;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Long getBoxNumber() {
@@ -49,12 +52,19 @@ public class FiscalDocument extends DocumentType {
         this.guideType = guideType;
     }
 
-    public Instant getPeriod() {
-        return period;
+    public Instant getStartDate() {
+        return startDate;
     }
 
-    public void setPeriod(Instant period) {
-        this.period = period;
+    public void setStartDate(Instant startDate) {
+        this.startDate = startDate;
     }
 
+    public Instant getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Instant endDate) {
+        this.endDate = endDate;
+    }
 }

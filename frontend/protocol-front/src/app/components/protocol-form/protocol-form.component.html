@@ -86,7 +86,7 @@
 
         <mat-form-field class="full-width">
           <mat-label>Nº do Contrato</mat-label>
-          <input matInput type="text" formControlName="contractNumber">
+          <input matInput type="number" formControlName="contractNumber">
           <mat-error *ngIf="getFormArray()[i].get('contractNumber')?.invalid">{{ getErrorMessage("contractNumber") }}</mat-error>
         </mat-form-field>
 
@@ -123,13 +123,13 @@
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº do Documento / NF</mat-label>
-          <input matInput type="text" formControlName="numberDocumentAccounting">
+          <input matInput type="number" formControlName="numberDocumentAccounting">
           <mat-error *ngIf="getFormArray()[i].get('numberDocumentAccounting')?.invalid">{{ getErrorMessage("numberDocumentAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Valor Baixado</mat-label>
-          <input matInput type="text" formControlName="invoiceValueAccounting">
+          <input matInput type="number" formControlName="invoiceValueAccounting">
           <mat-error *ngIf="getFormArray()[i].get('invoiceValueAccounting')?.invalid">{{ getErrorMessage("invoiceValueAccounting") }}</mat-error>
         </mat-form-field>
 
@@ -143,13 +143,13 @@
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Nº PAG</mat-label>
-          <input matInput type="text" formControlName="numberPayAccounting">
+          <input matInput type="number" formControlName="numberPayAccounting">
           <mat-error *ngIf="getFormArray()[i].get('numberPayAccounting')?.invalid">{{ getErrorMessage("numberPayAccounting") }}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width" style="width: 48%;">
           <mat-label>Borderô</mat-label>
-          <input matInput type="text" formControlName="borderoAccounting">
+          <input matInput type="number" formControlName="borderoAccounting">
           <mat-error *ngIf="getFormArray()[i].get('borderoAccounting')?.invalid">{{ getErrorMessage("borderoAccounting") }}</mat-error>
         </mat-form-field>
       </div>

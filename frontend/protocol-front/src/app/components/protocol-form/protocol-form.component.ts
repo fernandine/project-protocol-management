@@ -54,7 +54,7 @@ export class ProtocolFormComponent {
     console.log('number' + protocol.protocolNumber);
 
     this.form = this.formBuilder.group({
-      _id: [protocol._id],
+      id: [protocol.id],
       institution: [protocol.institution, [Validators.required]],
       management: [protocol.management, [Validators.required]],
       operatingUnit: [protocol.operatingUnit, [Validators.required]],

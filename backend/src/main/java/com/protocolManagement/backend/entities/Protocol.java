@@ -19,9 +19,9 @@ public class Protocol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("_id")
     private Long id;
     @NotNull
+    @Column (name = "protocol_number")
     private String protocolNumber;
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -39,9 +39,8 @@ public class Protocol implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
     private Boolean received;
-    @NotNull
+
     @Column (name = "received_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant receivedDate;
     public Protocol() {}

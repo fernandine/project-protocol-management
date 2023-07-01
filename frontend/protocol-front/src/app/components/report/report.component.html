@@ -1,0 +1,22 @@
+<div class="container">
+<h2 style="margin-left: 10px;">Detalhes do Protocolo</h2>
+
+<div>
+  <p style="margin-left: 10px;"><strong>Número do Protocolo:</strong> {{ protocol.protocolNumber }}</p>
+  <p style="margin-left: 10px;"><strong>Entidade:</strong> {{ protocol.institution }}</p>
+  <p style="margin-left: 10px;"><strong>Gerência:</strong> {{ protocol.management }}</p>
+  <p style="margin-left: 10px;"><strong>Unidade Operacional:</strong> {{ protocol.operatingUnit }}</p>
+  <p style="margin-left: 10px;"><strong>Usuário:</strong> {{ protocol.user.firstName }} {{ protocol.user.lastName }}</p>
+  <div *ngFor="let document of protocol.documents">
+  <p style="margin-left: 10px;"><strong>Tipo(s) de Documento(s):</strong> {{ document.type }}</p>
+</div>
+
+<mat-card-actions class="actions-center">
+  <button mat-raised-button color="primary" (click)="onPDF(protocol.id)">
+    Gerar PDF
+  </button>
+  <button mat-raised-button (click)="onDownload(protocol.id)" class="btn-space">
+    Download
+  </button>
+</mat-card-actions>
+

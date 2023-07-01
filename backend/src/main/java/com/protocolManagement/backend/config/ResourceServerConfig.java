@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -36,7 +37,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private static final String[] USER = {
             "/oauth/token",
             "/register/**",
-            "/protocol-reader/**"
+            "/protocol-reader/**",
+            "/relatorio/pdf/**",
+            "/companies/**"
     };
 
     private static final String[] OPERATOR = {
@@ -45,6 +48,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             "/register/**",
             "/users/**",
             "/protocols/**",
+            "/relatorio/pdf/**",
+            "/companies/**"
 
     };
 
@@ -86,7 +91,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
         corsConfig.setAllowCredentials(true);
         //corsConfig.addAllowedHeader("*");
-        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "ResponseType"));
+        corsConfig.setExposedHeaders(Arrays.asList("Content-Disposition"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);

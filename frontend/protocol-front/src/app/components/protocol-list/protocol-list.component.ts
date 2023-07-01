@@ -8,6 +8,10 @@ import {
 import { Protocol } from '../../common/protocol';
 import { ProtocolService } from '../../services/protocol.service';
 import { Page } from 'src/app/common/pagination';
+import { ReportService } from '../../services/report.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReportComponent } from '../report/report.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-protocol-list',
@@ -33,7 +37,11 @@ export class ProtocolListComponent {
     'actions',
   ];
 
-  constructor(private protocolService: ProtocolService) {}
+  constructor(
+    private protocolService: ProtocolService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+    ) {}
 
   ngOnInit(): void {
     this.loadProtocolsWithPagination();
@@ -44,6 +52,20 @@ export class ProtocolListComponent {
       this.loadProtocolsWithPagination();
     }
   }
+
+onReport(protocol: Protocol): void {
+  const dialogRef = this.dialog.open(ReportComponent, {
+    width: '35%',
+    data: protocol,
+  });
+
+  dialogRef.afterClosed().subscribe((result: Protocol | undefined) => {
+    if (result) {
+      this.protocols.push(result);
+      this.snackBar.open('Relatório adicionado com sucesso', 'Fechar', { duration: 3000 });
+    }
+  });
+}
 
   loadProtocolsWithPagination() {
     const { pageIndex, pageSize } = this.paginationData;
@@ -59,10 +81,6 @@ export class ProtocolListComponent {
 
   onAdd() {
     this.add.emit(true);
-  }
-
-  onPdf(protocol: Protocol) {
-    this.pdf.emit(protocol);
   }
 
   onEdit(protocol: Protocol) {

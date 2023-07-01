@@ -2,7 +2,7 @@ import { DocumentType } from "./document-type";
 import { User } from "./user";
 
 export interface Protocol {
-  _id: string;
+  id: number;
   institution: string;
   management: string;
   operatingUnit: string;

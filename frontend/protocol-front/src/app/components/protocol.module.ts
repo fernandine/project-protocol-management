@@ -15,6 +15,8 @@ import { ProtocolReaderComponent } from './protocol-reader/protocol-reader.compo
 import { ConfirmationProtocolComponent } from './confirmation-protocol/confirmation-protocol.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import { RolePipePipe } from '../shared/role-pipe.pipe';
+import { ReportService } from '../services/report.service';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { RolePipePipe } from '../shared/role-pipe.pipe';
     RolePipePipe,
     ProtocolReaderComponent,
     ConfirmationProtocolComponent,
-    UserFormComponent
+    UserFormComponent,
+    ReportComponent
 
   ],
   imports: [
@@ -37,6 +40,7 @@ import { RolePipePipe } from '../shared/role-pipe.pipe';
     ProtocolRoutingModule,
     ReactiveFormsModule
   ], providers: [
+    ReportService,
    { provide: MatPaginatorIntl, useClass: CustomPaginatorService }
   ]
 })

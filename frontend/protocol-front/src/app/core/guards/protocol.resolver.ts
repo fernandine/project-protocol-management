@@ -23,7 +23,7 @@ export class ProtocolResolver implements Resolve<Protocol> {
     }
 
     return of({
-      _id: '',
+      id: 0,
       institution: EntityType.SESI,
       management: '',
       operatingUnit: '',

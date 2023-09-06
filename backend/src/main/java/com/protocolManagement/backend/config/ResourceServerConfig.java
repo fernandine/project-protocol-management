@@ -38,23 +38,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
             "/oauth/token",
             "/register/**",
             "/protocol-reader/**",
-            "/relatorio/pdf/**",
-            "/companies/**"
-    };
-
-    private static final String[] OPERATOR = {
-            "/oauth/token",
-            "/h2-console/**",
-            "/register/**",
-            "/users/**",
             "/protocols/**",
-            "/relatorio/pdf/**",
-            "/companies/**"
-
+            "/users/**"
     };
+
 
     private static final String[] ADMIN = {
-            "/admin/**"
+            "/admin/**",
+
     };
 
     @Override
@@ -72,7 +63,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers(USER).permitAll()
-                .antMatchers(OPERATOR).permitAll()
                 //.antMatchers(HttpMethod.POST, USER).permitAll()
                 //.antMatchers(USER).hasAnyRole("USER", "ADMIN")
                 .antMatchers(ADMIN).hasRole("ADMIN")

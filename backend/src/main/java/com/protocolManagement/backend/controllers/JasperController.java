@@ -14,7 +14,6 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/relatorio/pdf")
-@CrossOrigin(origins = "http://localhost:4200")
 public class JasperController {
 
     @Autowired

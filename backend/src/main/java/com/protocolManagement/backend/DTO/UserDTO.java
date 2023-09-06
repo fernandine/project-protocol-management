@@ -22,8 +22,7 @@ public class UserDTO implements Serializable {
     @NotBlank
     private String firstName;
     private String lastName;
-    private String mobileNumber;
-    @NotBlank
+    private String phone;
     @Email
     private String email;
     private Set<RoleDTO> roles;

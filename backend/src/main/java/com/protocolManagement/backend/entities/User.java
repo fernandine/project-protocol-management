@@ -25,8 +25,7 @@ public class User implements UserDetails, Serializable {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "mobile_number")
-    private String mobileNumber;
+    private String phone;
     @Column(unique = true)
     private String email;
     @JsonIgnore
@@ -34,18 +33,17 @@ public class User implements UserDetails, Serializable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Protocol> protocols = new ArrayList<>();
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(Long id, String firstName, String lastName, String mobileNumber, String email, String password) {
+    public User(Long id, String firstName, String lastName, String phone, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mobileNumber = mobileNumber;
+        this.phone = phone;
         this.email = email;
         this.password = password;
     }
@@ -78,12 +76,12 @@ public class User implements UserDetails, Serializable {
         this.lastName = lastName;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -103,20 +101,20 @@ public class User implements UserDetails, Serializable {
         this.password = password;
     }
 
-    public List<Protocol> getProtocols() {
-        return protocols;
-    }
-
-    public void setProtocols(List<Protocol> protocols) {
-        this.protocols = protocols;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Protocol> getProtocols() {
+        return protocols;
+    }
+
+    public void setProtocols(List<Protocol> protocols) {
+        this.protocols = protocols;
     }
 
     @Override

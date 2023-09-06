@@ -3,42 +3,28 @@ package com.protocolManagement.backend.entities;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.protocolManagement.backend.entities.enums.EntityType;
 import com.protocolManagement.backend.entities.enums.SupplieType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 import java.time.Instant;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_supplies")
 @JsonTypeName("supplies")
 public class Supplies extends DocumentType {
 
     @Column(name = "supplie_type")
     private SupplieType supplieType;
-    @Column (name="date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant dateYear;
-
-    public Supplies(){}
-
-    public Supplies(Long id, EntityType entity, Protocol protocol,
-                    SupplieType supplieType, Instant dateYear) {
-        super(id, entity, protocol);
-        this.supplieType = supplieType;
-        this.dateYear = dateYear;
-    }
-
-    public SupplieType getSupplieType() {
-        return supplieType;
-    }
-
-    public void setSupplieType(SupplieType supplieType) {
-        this.supplieType = supplieType;
-    }
-
-    public Instant getDateYear() {
-        return dateYear;
-    }
-
-    public void setDateYear(Instant dateYear) {
-        this.dateYear = dateYear;
-    }
+    @Pattern(regexp = "\\d{4}")
+    @Column (name = "date_year")
+    private String dateYear;
 }

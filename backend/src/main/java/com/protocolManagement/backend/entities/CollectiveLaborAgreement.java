@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import java.time.Instant;
 
@@ -21,13 +22,11 @@ import java.time.Instant;
 @Table(name = "tb_collective_labor_agreement")
 @JsonTypeName("collectiveLaborAgreement")
 public class CollectiveLaborAgreement extends DocumentType {
-    @NotNull
+
     @Column(name = "box_number")
     private Long boxNumber;
-    @NotNull
     private String company;
-    @NotNull
-    @Column (name = "date_year", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant dateYear;
-
+    @Pattern(regexp = "\\d{4}")
+    @Column (name = "date_year")
+    private String dateYear;
 }

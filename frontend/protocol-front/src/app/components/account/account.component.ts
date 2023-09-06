@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/common/user';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { Location } from '@angular/common';
 import { Protocol } from 'src/app/common/protocol';
 import { Page } from 'src/app/common/pagination';
 import { ProtocolService } from 'src/app/services/protocol.service';
@@ -35,20 +33,16 @@ export class AccountComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    const pageSize = 10;
-    const pageIndex = 0;
-    const pageElements = 100;
+    const page = 0;
+    const size = 200;
 
-    this.protocolService.listWithPagination(pageSize, pageIndex, pageElements).subscribe(
+    this.protocolService.list(page, size).subscribe(
       protocols => this.protocols = protocols || undefined,
       error => console.error(error)
     );
     this.userService.getUser().subscribe(users => {
-      // Extrai as autoridades de todos os usuários em um único array
     const allAuthorities = users.flatMap((user) => user.roles.map((role) => role.authority));
-    // Constrói um array com apenas as autoridades únicas
     this.authorities = [...new Set(allAuthorities)];
-    // Salva os usuários buscados na propriedade users
       this.users = users;
     });
 
@@ -58,7 +52,7 @@ export class AccountComponent implements OnInit {
      email: ['', [Validators.required, Validators.email]],
      firstName: ['', Validators.required],
      lastName: ['', Validators.required],
-     mobileNumber: ['', Validators.required],
+     phone: ['', Validators.required],
      roles: ['', Validators.required],
      password: ['', Validators.required],
      passConfirmation: ['', Validators.required]

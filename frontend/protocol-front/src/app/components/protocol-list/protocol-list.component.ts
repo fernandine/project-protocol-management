@@ -3,15 +3,17 @@ import {
   EventEmitter,
   Input,
   Output,
-  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { Protocol } from '../../common/protocol';
 import { ProtocolService } from '../../services/protocol.service';
 import { Page } from 'src/app/common/pagination';
-import { ReportService } from '../../services/report.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReportComponent } from '../report/report.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { User } from 'src/app/common/user';
 
 @Component({
   selector: 'app-protocol-list',
@@ -21,7 +23,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProtocolListComponent {
 
   @Input() protocols: Protocol[] = [];
-  @Input() paginationData: any = { pageIndex: 0, pageSize: 10, totalItems: 0 };
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Input() dataSource = new MatTableDataSource<Protocol>(this.protocols);
 
   @Output() add = new EventEmitter(false);
   @Output() edit = new EventEmitter(false);
@@ -38,20 +42,24 @@ export class ProtocolListComponent {
   ];
 
   constructor(
-    private protocolService: ProtocolService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private protocolService: ProtocolService
     ) {}
 
-  ngOnInit(): void {
-    this.loadProtocolsWithPagination();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['paginationData'] && !changes['paginationData'].firstChange) {
-      this.loadProtocolsWithPagination();
+    ngOnInit() {
+      this.refresh();
     }
-  }
+
+    refresh() {
+      const page = 0;
+      const size = 200;
+      this.protocolService.list(page, size).subscribe((response: Page<Protocol>) => {
+        this.dataSource.data = response.content;
+        this.dataSource.paginator = this.paginator;
+      });
+    }
+
 
 onReport(protocol: Protocol): void {
   const dialogRef = this.dialog.open(ReportComponent, {
@@ -66,18 +74,6 @@ onReport(protocol: Protocol): void {
     }
   });
 }
-
-  loadProtocolsWithPagination() {
-    const { pageIndex, pageSize } = this.paginationData;
-
-    this.protocolService
-      .listWithPagination(pageSize, pageIndex, pageSize)
-      .subscribe((page: Page<Protocol>) => {
-        console.log('Página de protocolos:', page);
-        this.paginationData.totalItems = page.totalElements;
-        this.protocols = page.content;
-      });
-  }
 
   onAdd() {
     this.add.emit(true);

@@ -29,7 +29,7 @@ public class DocumentType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+
     @Enumerated(EnumType.STRING)
     private EntityType entity;
 

@@ -40,7 +40,7 @@
       <mat-error
       *ngIf="formUtils.isFormArrayRequired(form, 'documents')"
       class="form-array-error">
-      Pelo menos um tipo de document é necessário.
+      Pelo menos um tipo de documento é necessário.
     </mat-error>
 
       <div formArrayName="documents"
@@ -213,14 +213,8 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Nº da Caixa</mat-label>
-    <input matInput type="text" formControlName="boxNumber">
+    <input matInput type="number" formControlName="boxNumber">
     <mat-error *ngIf="getFormArray()[i].get('boxNumber')?.invalid">{{ getErrorMessage("boxNumber") }}</mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="full-width" style="width: 48%;">
-    <mat-label>Nº do Processo</mat-label>
-    <input matInput type="text" formControlName="processNumber">
-    <mat-error *ngIf="getFormArray()[i].get('processNumber')?.invalid">{{ getErrorMessage("processNumber") }}</mat-error>
   </mat-form-field>
 
   <mat-form-field class="full-width" style="width: 48%;">
@@ -231,8 +225,8 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Ano</mat-label>
-    <input matInput type="number" formControlName="year" [pattern]="'^\d{4}$'">
-    <mat-error *ngIf="getFormArray()[i].get('year')?.invalid">{{ getErrorMessage("year") }}</mat-error>
+    <input matInput type="text" formControlName="dateYear">
+    <mat-error *ngIf="getFormArray()[i].get('year')?.invalid">{{ getErrorMessage("dateYear") }}</mat-error>
   </mat-form-field>
 </div>
 </div>
@@ -272,6 +266,7 @@
   </mat-form-field>
 </div>
 </div>
+
 <!--OPTION SELECTION PROCESS-->
 <div class="form-inline" *ngSwitchCase="'selectionProcess'">
   <div style="display: flex; justify-content: space-between; width: 100%;">
@@ -352,11 +347,7 @@
     <mat-error *ngIf="getFormArray()[i].get('shutdownFunctionalFolder')?.invalid">{{ getErrorMessage("shutdownFunctionalFolder") }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field class="full-width" style="width: 48%;">
-    <mat-label>Funcionário</mat-label>
-    <input matInput type="text" formControlName="employee">
-    <mat-error *ngIf="getFormArray()[i].get('employee')?.invalid">{{ getErrorMessage("employee") }}</mat-error>
-  </mat-form-field>
+
 </div>
 </div>
 
@@ -411,7 +402,7 @@
 
   <mat-form-field class="full-width" style="width: 48%;">
     <mat-label>Ano</mat-label>
-    <input matInput type="number" formControlName="dateYearSupplies" [pattern]="'^\d{4}$'">
+    <input matInput type="text" formControlName="dateYearSupplies" [pattern]="'^\d{4}$'">
     <mat-error *ngIf="getFormArray()[i].get('dateYearSupplies')?.invalid">{{ getErrorMessage("dateYearSupplies") }}</mat-error>
   </mat-form-field>
 </div>

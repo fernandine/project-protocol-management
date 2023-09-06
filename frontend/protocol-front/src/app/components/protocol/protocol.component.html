@@ -1,22 +1,12 @@
 <mat-card>
     <mat-toolbar color="primary" class="toolbar">
       Protocolos Disponíveis
-      <div class="paginator-container">
-        <mat-paginator class="paginator"
-        [length]="paginationData.pageElements"
-        [pageSize]="10"
-        [pageSizeOptions]="[5, 10, 25, 100]"
-        (page)="onPaginatorChange($event)"
-        aria-label="Select page">
-      </mat-paginator>
-  </div>
     </mat-toolbar>
 
   <div class="example-container mat-elevation-z8">
     <app-protocol-list
-    *ngIf="(page$ | async)?.content?.length; else loading"
-      [paginationData]="paginationData"
-      (add)="onAdd()"
+    [protocols] = "protocols"
+    (add)="onAdd()"
       (edit)="onEdit($event)"
       (remove)="onRemove($event)"
     ></app-protocol-list>

@@ -35,13 +35,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe((success) => {
         if (success) {
-          this.router.navigate(['/protocols']);
-console.log(this.loginForm);
+          this.authService.redirectToProfileBasedOnRole(); // Redirecionar com base na role após o login
         }
       });
     }
   }
 
+  recoverPass() {
+    this.router.navigate(['/recover-password']);
+  }
   onRegister() {
     this.router.navigate(['/register']);
   }

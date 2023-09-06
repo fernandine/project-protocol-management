@@ -20,9 +20,9 @@
         <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="mobileNumber">
+      <ng-container matColumnDef="phone">
         <mat-header-cell *matHeaderCellDef>Celular</mat-header-cell>
-        <mat-cell *matCellDef="let user">{{ user.mobileNumber }}</mat-cell>
+        <mat-cell *matCellDef="let user">{{ user.phone }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="roles">
@@ -38,9 +38,8 @@
           </button>
         </mat-cell>
       </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['email', 'firstName', 'lastName', 'mobileNumber', 'roles', 'actions']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['email', 'firstName', 'lastName', 'mobileNumber', 'roles', 'actions']"></mat-row>
+      <mat-header-row *matHeaderRowDef="displayedColumnsUser"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsUser"></mat-row>
     </mat-table>
 
     <ng-template #loading>

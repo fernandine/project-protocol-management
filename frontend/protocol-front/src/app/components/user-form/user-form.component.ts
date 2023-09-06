@@ -20,11 +20,8 @@ export class UserFormComponent {
 
   roles: Role[] = [
     { id: 1, authority: 'ROLE_USER' },
-    { id: 2, authority: 'ROLE_OPERATOR' },
-    { id: 3, authority: 'ROLE_ADMIN' },
+    { id: 2, authority: 'ROLE_ADMIN' },
   ];
-
-  displayedColumns = ['user', 'protocolNumber', 'received', 'receivedDate'];
 
   constructor(
     private userService: UserService,
@@ -36,7 +33,7 @@ export class UserFormComponent {
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
+      phone: ['', Validators.required],
       password: ['', Validators.required],
       roles: ['', Validators.required],
     });

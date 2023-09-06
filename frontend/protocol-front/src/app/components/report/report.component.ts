@@ -1,7 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Accounting } from 'src/app/common/accounting';
-import { Contracts } from 'src/app/common/contracts';
 import { Protocol } from 'src/app/common/protocol';
 import { ReportService } from 'src/app/services/report.service';
 
@@ -21,7 +19,7 @@ export class ReportComponent {
     @Inject(MAT_DIALOG_DATA) public protocol: Protocol
   ) {}
 
-onPDF(id: number): void {
+onPDF(id: string): void {
   if (id) {
   this.report.getPDF(this.code, this.acao, id).subscribe(blob => {
     const file = new Blob([blob], { type: 'application/pdf' });
@@ -31,7 +29,7 @@ onPDF(id: number): void {
  }
 }
 
-onDownload(id: number): void {
+onDownload(id: string): void {
   if (id) {
   this.report.getPDF(this.code, this.download, id).subscribe(blob => {
     const file = new Blob([blob], { type: 'application/pdf' });

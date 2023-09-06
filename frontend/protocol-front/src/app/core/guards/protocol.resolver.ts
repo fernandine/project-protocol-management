@@ -23,20 +23,20 @@ export class ProtocolResolver implements Resolve<Protocol> {
     }
 
     return of({
-      id: 0,
+      id: '',
       institution: EntityType.SESI,
       management: '',
       operatingUnit: '',
       protocolNumber: '',
       received: true,
-      receivedDate: new Date,
+      receivedDate: new Date(),
       documents: [],
       user: {
         id: '',
         email: '',
         firstName: '',
         lastName: '',
-        mobileNumber: '',
+        phone: '',
         roles: []
       }
     });

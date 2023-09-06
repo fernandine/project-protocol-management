@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -17,7 +18,8 @@ export class NavbarComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private location: Location) { }
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isAuthenticated();
@@ -32,6 +34,7 @@ export class NavbarComponent {
     const currentUser = this.authService.getCurrentUser();
     return currentUser ? currentUser.firstName : '';
   }
+
   account() {
     this.router.navigate(['/account']);
   }
@@ -50,7 +53,6 @@ export class NavbarComponent {
 
   logout(): void {
     this.authService.logout();
-    location.reload();
-    this.router.navigate(['/auth-login']);
+    this.location.back();
   }
 }

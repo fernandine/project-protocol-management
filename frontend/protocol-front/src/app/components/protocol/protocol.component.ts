@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Page } from 'src/app/common/pagination';
@@ -17,13 +18,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 })
 export class ProtocolComponent {
 
-  page$: Observable<Page<Protocol>> | null = null;
-
-  paginationData = {
-    pageIndex: 0,
-    pageSize: 10,
-    pageElements: 0
-  };
+  protocols: Protocol[] = [];
 
   constructor(
     private protocolService: ProtocolService,
@@ -34,38 +29,6 @@ export class ProtocolComponent {
   ) {}
 
   ngOnInit() {
-    this.refresh();
-  }
-
-  refresh() {
-    const pageSize = 10;
-    const pageIndex = 0;
-    const pageElements = 0;
-    this.protocolService.listWithPagination(pageSize, pageIndex, pageElements)
-    .pipe(
-      catchError(error => {
-        this.onError('Erro ao carregar protocolo.');
-        return of({ content: [], totalPages: 0, totalElements: 0 });
-      }),
-      map(({ content, totalPages, totalElements }) => ({ content, totalPages, totalElements } as Page<Protocol>))
-    )
-    .subscribe(page => {
-      console.log('Página de protocolos:', page);
-      this.page$ = of(page);
-      this.paginationData.pageElements = page.totalElements;
-    });
-  }
-
-onPaginatorChange(event: PageEvent): void {
-  this.paginationData.pageIndex = event.pageIndex;
-  this.paginationData.pageSize = event.pageSize;
-  this.paginationData.pageElements = event.length;
-  this.refresh();
-}
-  onError(errorMsg: string) {
-    this.dialog.open(ErrorDialogComponent, {
-      data: errorMsg
-    });
   }
 
   onAdd() {
@@ -85,14 +48,12 @@ onPaginatorChange(event: PageEvent): void {
       if (result) {
         this.protocolService.remove(protocol.id).subscribe(
           () => {
-            this.refresh();
             this.snackBar.open('Protocolo removido com sucesso!', 'X', {
               duration: 5000,
               verticalPosition: 'top',
               horizontalPosition: 'center'
             });
           },
-          () => this.onError('Erro ao tentar remover protocolo.')
         );
       }
     });

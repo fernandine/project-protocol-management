@@ -1,26 +1,31 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {  map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { StorageService } from './storage.service';
 import { Role } from '../common/role';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private authUrl = environment.authURL + '/oauth/token';
+  private authUrl = environment.apiURL + '/oauth/token';
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) { }
 
   login(username: string, password: string): Observable<boolean> {
+    const clientId = environment.clientId;
+    const clientSecret = environment.clientSecret;
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + btoa('protocol:protocol123')
+      Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
     });
 
     const body = new URLSearchParams();
@@ -34,11 +39,9 @@ export class AuthService {
         const id = response.id;
         const firstName = response.firstName;
         const email = response.email;
-        const lastName = response.lastName;
-        const mobileNumber = response.mobileNumber;
         const roles = response.roles;
         if (token) {
-          const currentUser = { username, token, id, email, lastName, firstName, mobileNumber, roles};
+          const currentUser = { username, token, id, email, firstName, roles};
           this.storageService.setItem('currentUser', currentUser);
           return true;
         } else {
@@ -49,31 +52,48 @@ export class AuthService {
   }
 
   getCurrentUser(): {
+    phone: string;
+    lastName: string;
     username: string;
     token: string;
     id: string
-    lastName: string;
     firstName: string;
-    mobileNumber: string;
     email: string;
-    roles: string;
+    roles: Role[];
   } | null {
     const currentUser = this.storageService.getItem('currentUser');
-    //console.log('currentUser:', currentUser);
     if (currentUser && currentUser.token) {
-      //console.log('token:', currentUser.token);
       return {
         email: currentUser.email || '',
         username: currentUser.username || '',
         token: currentUser.token || '',
         id: currentUser.id || '',
-        lastName: currentUser.lastName || '',
         firstName: currentUser.firstName || '',
-        mobileNumber: currentUser.mobileNumber || '',
-        roles: currentUser.roles || ''
+        lastName: currentUser.lastName || '',
+        phone: currentUser.phone || '',
+        roles: currentUser.roles || []
       };
     } else {
       return null;
+    }
+  }
+
+  isAuthenticated(): boolean {
+    const currentUser = this.storageService.getItem('currentUser');
+    return !!currentUser && !!currentUser.token;
+  }
+
+  redirectToProfileBasedOnRole() {
+    const currentUser = this.getCurrentUser();
+
+    if (currentUser) {
+      const userAuthorities = currentUser.roles.map(role => role.authority);
+
+      if (userAuthorities.includes('ROLE_USER')) {
+        this.router.navigate(['/protocol-reader']);
+      } else if (userAuthorities.includes('ROLE_ADMIN')) {
+        this.router.navigate(['/protocols']);
+      }
     }
   }
 
@@ -86,16 +106,4 @@ export class AuthService {
     return currentUser.token;
   }
 
-  isAuthenticated(): boolean {
-    const currentUser = this.storageService.getItem('currentUser');
-    return !!currentUser && !!currentUser.token;
-  }
-
-  getHeaders(): HttpHeaders {
-    const token = this.getToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-  }
 }

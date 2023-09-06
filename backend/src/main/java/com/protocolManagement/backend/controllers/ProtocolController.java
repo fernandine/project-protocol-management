@@ -3,29 +3,24 @@ package com.protocolManagement.backend.controllers;
 import com.protocolManagement.backend.DTO.ProtocolDTO;
 import com.protocolManagement.backend.services.ProtocolService;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.IOException;
 import java.net.URI;
 import java.sql.Connection;
 
 @Validated
 @RestController
 @RequestMapping(value = "/protocols")
-@CrossOrigin(origins = "http://localhost:4200")
 public class ProtocolController {
 
     @Autowired

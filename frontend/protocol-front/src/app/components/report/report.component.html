@@ -6,7 +6,6 @@
   <p style="margin-left: 10px;"><strong>Entidade:</strong> {{ protocol.institution }}</p>
   <p style="margin-left: 10px;"><strong>Gerência:</strong> {{ protocol.management }}</p>
   <p style="margin-left: 10px;"><strong>Unidade Operacional:</strong> {{ protocol.operatingUnit }}</p>
-  <p style="margin-left: 10px;"><strong>Usuário:</strong> {{ protocol.user.firstName }} {{ protocol.user.lastName }}</p>
   <div *ngFor="let document of protocol.documents">
   <p style="margin-left: 10px;"><strong>Tipo(s) de Documento(s):</strong> {{ document.type }}</p>
 </div>

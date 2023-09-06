@@ -112,8 +112,7 @@ public class UserService implements UserDetailsService {
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setEmail(dto.getEmail());
-        entity.setMobileNumber(dto.getMobileNumber());
-
+        entity.setPhone(dto.getPhone());
         entity.getRoles().clear();
         if (dto.getRoles() != null) {
             for (RoleDTO roleDto : dto.getRoles()) {

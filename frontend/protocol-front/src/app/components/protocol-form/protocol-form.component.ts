@@ -15,7 +15,6 @@ import { StatusFunctionalFolder } from 'src/app/common/enums/status-functional-f
 import { SupplieType } from 'src/app/common/enums/supplie-type.enum';
 import { DocumentType } from 'src/app/common/document-type';
 import { FormUtilsService } from 'src/app/services/form-utils.service';
-import { AuthService } from '../../services/auth.service';
 import { Accounting } from 'src/app/common/accounting';
 import { CollectiveLaborAgreement } from 'src/app/common/collective-labor-agreement';
 import { Contracts } from 'src/app/common/contracts';
@@ -27,6 +26,9 @@ import { MedicalRecord } from 'src/app/common/medical-record';
 import { SelectionProcess } from 'src/app/common/selection-process';
 import { Supplies } from 'src/app/common/supplies';
 import { TechnicalReport } from 'src/app/common/technical-report';
+import { UserService } from '../../services/user.service';
+import { User } from 'src/app/common/user';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-protocol-form',
@@ -34,6 +36,7 @@ import { TechnicalReport } from 'src/app/common/technical-report';
   styleUrls: ['./protocol-form.component.scss'],
 })
 export class ProtocolFormComponent {
+
   form!: FormGroup;
   entityTypes = Object.values(EntityType);
   statusFunctionalFolder = Object.values(StatusFunctionalFolder);
@@ -102,7 +105,6 @@ export class ProtocolFormComponent {
       borderoAccounting: [accounting.bordero || null],
 
       boxNumber: [collectiveLaborAgreement.boxNumber || null],
-      processNumber: [collectiveLaborAgreement.processNumber || null],
       company: [collectiveLaborAgreement.company || ''],
       dateYear: [collectiveLaborAgreement.dateYear || null],
 
@@ -167,22 +169,20 @@ export class ProtocolFormComponent {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      const record = this.form.value as Partial<Protocol>;
-      const currentUser = this.authService.getCurrentUser();
-      if (currentUser) {
-        // Define o objeto do usuário no registro de protocolo
-        record.user = {
-          id: currentUser.id,
-          email: currentUser.email,
-          firstName: currentUser.firstName,
-          lastName: currentUser.lastName,
-          mobileNumber: currentUser.mobileNumber,
-          roles: [],
-        };
-      }
-      // Salva o registro de protocolo com o número do protocolo gerado
-      this.service.save(this.service.generateProtocolNumber(record)).subscribe({
+    const record = this.form.value as Partial<Protocol>;
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      // Define o objeto do usuário no registro de protocolo
+      record.user = {
+        id: currentUser.id,
+        email: currentUser.email,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        phone: currentUser.phone,
+        roles: [],
+      };
+
+      this.service.save(record).subscribe({
         next: () => this.onSuccess(),
         error: () => this.onError(),
       });
@@ -196,12 +196,12 @@ export class ProtocolFormComponent {
   }
 
   private onSuccess() {
-    this.snackBar.open('Curso salvo com sucesso!', '', { duration: 5000 });
+    this.snackBar.open('Protocolo salvo com sucesso!', '', { duration: 5000 });
     this.onCancel();
   }
 
   private onError() {
-    this.snackBar.open('Erro ao salvar curso.', '', { duration: 5000 });
+    this.snackBar.open('Erro ao salvar protocolo.', '', { duration: 5000 });
   }
 
   getDocumentErrorMessage(fieldName: string, index: number) {

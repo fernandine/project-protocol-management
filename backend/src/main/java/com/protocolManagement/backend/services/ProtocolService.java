@@ -1,6 +1,7 @@
 package com.protocolManagement.backend.services;
 
 import com.protocolManagement.backend.DTO.ProtocolDTO;
+import com.protocolManagement.backend.DTO.UserDTO;
 import com.protocolManagement.backend.entities.DocumentType;
 import com.protocolManagement.backend.entities.Protocol;
 import com.protocolManagement.backend.entities.User;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,7 +63,7 @@ public class ProtocolService {
     public ProtocolDTO findByProtocol(String protocolNumber) {
         Protocol protocol = repository.findByProtocolNumber(protocolNumber);
         if (protocol == null) {
-            throw new ResourceNotFoundException("Protocol not found");
+            throw new ResourceNotFoundException("Protocol não encontrado");
         }
         return modelMapper.map(protocol, ProtocolDTO.class);
     }
@@ -75,10 +78,8 @@ public class ProtocolService {
     @Transactional
     public ProtocolDTO insert(@Valid ProtocolDTO dto) {
         Protocol entity = new Protocol();
-
-
-        copyDtoToEntity(dto, entity);
-
+        User user = new User();
+        copyDtoToEntity(dto, entity, user);
         entity = repository.save(entity);
         return modelMapper.map(entity, ProtocolDTO.class);
     }
@@ -86,10 +87,9 @@ public class ProtocolService {
     @Transactional
     public ProtocolDTO update( Long id, ProtocolDTO dto) {
         try {
+            User user = new User();
             Protocol entity = repository.getReferenceById(id);
-
-
-            copyDtoToEntity(dto, entity);
+            copyDtoToEntity(dto, entity, user);
 
             entity = repository.save(entity);
             return modelMapper.map(entity, ProtocolDTO.class);
@@ -119,14 +119,15 @@ public class ProtocolService {
                 .collect(Collectors.toList());
     }
 
-//    private String generateProtocolNumber(User user ) {
-//        return "DOC" + user.getId() + "-" +
-//                LocalDateTime.now().format(
-//                        DateTimeFormatter.ofPattern("yyyyMMdd")) +
-//                new Random().nextInt(900) + 100;
-//    }
+    @Transactional(readOnly = true)
+    private String generateProtocolNumber(User user ) {
+        return "DOC" + user.getId() + "-" +
+                LocalDateTime.now().format(
+                        DateTimeFormatter.ofPattern("yyyyMMdd")) +
+                new Random().nextInt(900) + 100;
+    }
 
-    private void copyDtoToEntity(ProtocolDTO dto, Protocol entity) {
+    private void copyDtoToEntity(ProtocolDTO dto, Protocol entity, User user) {
 
         entity.setInstitution(dto.getInstitution());
         entity.setOperatingUnit(dto.getOperatingUnit());
@@ -136,17 +137,15 @@ public class ProtocolService {
         entity.setReceivedDate(dto.getReceivedDate());
 
         if (dto.getUser() != null) {
-            User user = new User();
             user.setId(dto.getUser().getId());
-            user.setEmail(dto.getUser().getEmail());
             user.setFirstName(dto.getUser().getFirstName());
             user.setLastName(dto.getUser().getLastName());
-            user.setMobileNumber(dto.getUser().getMobileNumber());
+
+            entity.setProtocolNumber(generateProtocolNumber(user));
+
             entity.setUser(user);
+            repository.save(entity);
         }
-//        if (entity.getUser() != null) {
-//            entity.setProtocolNumber(generateProtocolNumber(user));
-//        }
 
         List<DocumentType> documents = new ArrayList<>();
         for (DocumentType document : dto.getDocuments()) {
@@ -157,8 +156,5 @@ public class ProtocolService {
         entity.setDocuments(documents);
         repository.save(entity);
 
-        for (DocumentType document : documents) {
-            documentTypeRepository.save(document);
-        }
     }
 }
